@@ -1,0 +1,7 @@
+## Compilation
+
+`make`
+
+## Running
+
+`./runner`
