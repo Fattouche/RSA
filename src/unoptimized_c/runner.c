@@ -3,6 +3,5 @@
 int main()
 {
   montgomery_multiplication();
-
   return 0;
 }

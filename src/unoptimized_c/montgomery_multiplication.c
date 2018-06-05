@@ -1,7 +1,5 @@
 #include "montgomery_multiplication.h"
 
-
-
 // Computes X * Y mod m
 void montgomery_multiplication(uint128_t x, uint128_t y, uint128_t m)
 {
