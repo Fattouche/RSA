@@ -9,4 +9,4 @@ $(EXECUTABLE): $(SOURCE) $(HEADERS)
 .PHONY: clean
 
 clean:
-	rm -f PMan
+	rm -f ${BUILD_DIR}/runner
