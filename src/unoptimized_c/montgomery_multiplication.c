@@ -1,8 +1,6 @@
-#include <stdio.h>
-
 #include "montgomery_multiplication.h"
 
-void test()
+void montgomery_multiplication()
 {
-  printf("Hello, world!\n");
+  printf("Unsigned long long size: %lu bytes\n", sizeof(unsigned long long));
 }
