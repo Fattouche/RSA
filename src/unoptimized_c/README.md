@@ -4,4 +4,4 @@
 
 ## Running
 
-`./runner`
+`build/runner`
