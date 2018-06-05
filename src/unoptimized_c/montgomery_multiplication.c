@@ -1,6 +1,9 @@
 #include "montgomery_multiplication.h"
 
-void montgomery_multiplication()
+
+
+// Computes X * Y mod m
+void montgomery_multiplication(uint128_t x, uint128_t y, uint128_t m)
 {
-  printf("Unsigned long long size: %lu bytes\n", sizeof(unsigned long long));
+  printf("uint_128 size: %lu bytes\n", sizeof(uint128_t));
 }
