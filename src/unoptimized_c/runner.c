@@ -2,5 +2,7 @@
 
 int main()
 {
-  test();
+  montgomery_multiplication();
+
+  return 0;
 }
