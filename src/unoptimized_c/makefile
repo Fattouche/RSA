@@ -2,11 +2,11 @@ EXECUTABLE = ./build/runner
 SOURCE = runner.c montgomery_multiplication.c
 .PHONY: run
 
-run: runner
+run: build
 	@${EXECUTABLE}
 
-runner: 
+build:
 	@gcc ${SOURCE} -o ${EXECUTABLE}
 
-clean: 
+clean:
 	@rm -rf ${EXECUTABLE}
