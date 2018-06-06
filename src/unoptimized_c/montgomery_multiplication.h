@@ -23,6 +23,10 @@ uint128_t or_128(uint128_t left, uint128_t right);
 // Adds two uint128_t numbers
 uint128_t add_128(uint128_t left, uint128_t right);
 
+// Compares two uint128_t numbers
+// Return 1 if they are equal, 0 otherwise
+int equals_128(uint128_t left, uint128_t right);
+
 // Bitshifts a uint128_t to the right
 uint128_t bitshift_128_right(uint128_t input_num, uint128_t num_bits_to_shift);
 

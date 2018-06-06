@@ -48,6 +48,18 @@ uint128_t add_128(uint128_t left, uint128_t right)
   return result;
 }
 
+int equals_128(uint128_t left, uint128_t right)
+{
+  if (left.ls_bytes == right.ls_bytes && left.ms_bytes == right.ms_bytes)
+  {
+    return 1;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
 uint128_t bitshift_128_right(uint128_t input_num, uint128_t num_bits_to_shift)
 {
   uint128_t result;
