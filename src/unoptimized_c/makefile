@@ -10,3 +10,4 @@ runner:
 
 clean: 
 	@rm -rf ${EXECUTABLE}
+
