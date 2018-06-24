@@ -27,6 +27,10 @@ void montgomery_multiplication(uint128_t x_temp, uint128_t y_temp,
   }
 }
 
+void printNum(uint128_t num) {
+  printf("ms: %llu\nls: %llu\n", num.ms_bytes, num.ls_bytes);
+}
+
 int getBitAtIndex(unsigned long long num, int index) {
   if (index > (sizeof(num) * 8) - 1) {
     return -1;
