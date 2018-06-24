@@ -1,12 +1,13 @@
-BUILD_DIR = ./build
-HEADERS = montgomery_multiplication.h
+EXECUTABLE = ./build/runner
 SOURCE = runner.c montgomery_multiplication.c
-EXECUTABLE = ${BUILD_DIR}/runner
+.PHONY: run
 
-$(EXECUTABLE): $(SOURCE) $(HEADERS)
-	gcc -o $@ $(SOURCE) -Wall
+run: runner
+	@${EXECUTABLE}
 
-.PHONY: clean
+runner: 
+	@gcc ${SOURCE} -o ${EXECUTABLE}
 
-clean:
-	rm -f PMan
+clean: 
+	@rm -rf ${EXECUTABLE}
+
