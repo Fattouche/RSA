@@ -7,8 +7,6 @@
 
 #include "uint128_t.h"
 
-void montgomery_multiplication();
-int getBitAtIndex(unsigned long long num, int index);
-int getNumBits(unsigned long long num);
+uint128_t montgomery_multiplication();
 
-#endif // MONTGOMERY_MULTIPLICATION_H
+#endif  // MONTGOMERY_MULTIPLICATION_H
