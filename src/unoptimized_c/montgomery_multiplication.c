@@ -1,74 +1,51 @@
 #include "montgomery_multiplication.h"
 
-void error(const char* description)
-{
-  printf("ERROR: %s", description);
-  exit(1);
+// Computes X * Y mod m
+void montgomery_multiplication(uint128_t x_temp, uint128_t y_temp,
+                               uint128_t m_temp) {
+  int i;
+  unsigned long long T = 0;
+  unsigned long long m = 23;
+  unsigned long long x = 17;
+  unsigned long long y = 22;
+  unsigned long long n;
+  int y0 = getBitAtIndex(y, 0);
+
+  int loopLimit = getNumBits(m);
+
+  for (i = 0; i < loopLimit; i++) {
+    int t0 = getBitAtIndex(T, 0);
+    int Xi = getBitAtIndex(x, i);
+    int xANDy = Xi & y0;
+    n = (t0 | xANDy);
+    T = (T + Xi * y + n * m) >> 1;
+  }
+  if (T >= m) {
+    T = T - m;
+  }
 }
 
-uint128_t and_128(uint128_t left, uint128_t right)
-{
-  uint128_t result;
-
-  result.ls_bytes = left.ls_bytes & right.ls_bytes;
-  result.ms_bytes = left.ms_bytes & right.ms_bytes;
-
-  return result;
+void printNum(uint128_t num) {
+  printf("ms: %llu\nls: %llu\n", num.ms_bytes, num.ls_bytes);
 }
 
-uint128_t or_128(uint128_t left, uint128_t right)
-{
-  uint128_t result;
-
-  result.ls_bytes = left.ls_bytes | right.ls_bytes;
-  result.ms_bytes = left.ms_bytes | right.ms_bytes;
-
-  return result;
-}
-
-uint128_t add_128(uint128_t left, uint128_t right)
-{
-  uint128_t result = {0, 0};
-
-  result.ls_bytes = left.ls_bytes + right.ls_bytes;
-
-  // Check if overflow occured
-  if (result.ls_bytes < left.ls_bytes)
-  {
-    result.ms_bytes = 1;
+int getBitAtIndex(unsigned long long num, int index) {
+  if (index > (sizeof(num) * 8) - 1) {
+    return -1;
   }
 
-  result.ms_bytes += (left.ms_bytes + right.ms_bytes);
-
-  if (result.ms_bytes < left.ms_bytes)
-  {
-    error("Overflow on addition of 128 bits!\n");
-  }
-
-  return result;
-}
-
-int equals_128(uint128_t left, uint128_t right)
-{
-  if (left.ls_bytes == right.ls_bytes && left.ms_bytes == right.ms_bytes)
-  {
+  if (((1 << index) & num) > 0) {
     return 1;
   }
-  else
-  {
-    return 0;
+  return 0;
+}
+
+int getNumBits(unsigned long long num) {
+  int count = 0;
+
+  while (num > 0) {
+    count++;
+    num >>= 1;
   }
-}
-
-uint128_t bitshift_128_right(uint128_t input_num, uint128_t num_bits_to_shift)
-{
-  uint128_t result;
-
-  return result;
-}
-
-// Computes X * Y mod m
-void montgomery_multiplication(uint128_t x, uint128_t y, uint128_t m)
-{
-  printf("uint128_t size: %lu bytes\n", sizeof(uint128_t));
+  return count;
 }

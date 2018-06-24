@@ -2,11 +2,12 @@ EXECUTABLE = ./build/runner
 SOURCE = runner.c montgomery_multiplication.c
 .PHONY: run
 
-run: build
-	@${EXECUTABLE}
+run: runner
+	@qemu-arm ${EXECUTABLE}
 
-build:
-	@gcc ${SOURCE} -o ${EXECUTABLE}
+runner: 
+	@arm-linux-gcc -static ${SOURCE} -o ${EXECUTABLE}
 
 clean:
 	@rm -rf ${EXECUTABLE}
+
