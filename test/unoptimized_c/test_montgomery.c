@@ -36,14 +36,6 @@ int main()
     uint128_t a_b_expected = {984462842346ULL, 198375676560715ULL};
     print_128_test_result(a_b_result, a_b_expected, "Addition test 1", &test_results);
   }
-  {
-    uint128_t a_test = {135321511ULL, 348503485ULL};
-    uint128_t b_test = {984327520835ULL, 198375328057230ULL};
-
-    uint128_t a_b_result = add_128(a_test, b_test);
-    uint128_t a_b_expected = {984462842346ULL, 198375676560715ULL};
-    print_128_test_result(a_b_result, a_b_expected, "Addition test 2", &test_results);
-  }
 
   printf("\n");
   printf("***** All Tests Run ******\n");
