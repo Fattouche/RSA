@@ -60,9 +60,23 @@ int equals_128(uint128_t left, uint128_t right)
   }
 }
 
-uint128_t bitshift_128_right(uint128_t input_num, uint128_t num_bits_to_shift)
+uint128_t bitshift_128_right(uint128_t input_num, size_t num_bits_to_shift)
 {
-  uint128_t result;
+  size_t num_bits_in_unsigned_long_long = CHAR_BIT * sizeof(unsigned long long);
+
+  uint128_t result = {0, 0};
+
+  result.ls_bytes = input_num.ls_bytes >> num_bits_to_shift;
+
+  // Isolate the bits that are going to be lost by right shifting the ms_bytes
+  unsigned long long crossover = input_num.ms_bytes & 
+                                ((input_num.ms_bytes << num_bits_to_shift) - 1);
+
+  result.ms_bytes = input_num.ms_bytes >> num_bits_to_shift;
+
+  // Put the crossover bits onto the leftmost part of ls_bytes
+  result.ls_bytes |= (crossover << 
+                        (num_bits_in_unsigned_long_long - num_bits_to_shift));
 
   return result;
 }

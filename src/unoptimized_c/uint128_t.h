@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 typedef struct _uint128_t {
   // Least significant 8 bytes
@@ -29,6 +30,6 @@ uint128_t add_128(uint128_t left, uint128_t right);
 int equals_128(uint128_t left, uint128_t right);
 
 // Bitshifts a uint128_t to the right
-uint128_t bitshift_128_right(uint128_t input_num, uint128_t num_bits_to_shift);
+uint128_t bitshift_128_right(uint128_t input_num, size_t num_bits_to_shift);
 
 #endif // UINT128_T_H
