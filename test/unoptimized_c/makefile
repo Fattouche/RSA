@@ -1,4 +1,4 @@
-BUILD_DIR = ../build
+BUILD_DIR = ./build
 SRC_DIR = ../../src/unoptimized_c
 HEADER_DIR_1 = ${SRC_DIR}/montgomery_multiplication.h ${SRC_DIR}uint128_t.h
 SOURCE = test_montgomery.c ${SRC_DIR}/montgomery_multiplication.c ${SRC_DIR}/uint128_t.c

@@ -8,9 +8,9 @@ typedef struct _results {
   int failed;
 } results;
 
-void print_128_test_result(uint128_t actual, uint128_t expected, const char* description, results* test_results)
+void print_uint128_test_result(uint128_t actual, uint128_t expected, const char* description, results* test_results)
 {
-  if (equals_128(actual, expected))
+  if (equals_uint128(actual, expected))
   {
     (test_results->passed)++;
     //printf("%s\n", description);
@@ -29,12 +29,26 @@ int main()
   results test_results = {0, 0};
 
   {  
-    uint128_t a_test = {135321511ULL, 348503485ULL};
-    uint128_t b_test = {984327520835ULL, 198375328057230ULL};
+    uint128_t a_test = {348503485ULL, 135321511ULL};
+    uint128_t b_test = {198375328057230ULL, 984327520835ULL};
 
-    uint128_t a_b_result = add_128(a_test, b_test);
-    uint128_t a_b_expected = {984462842346ULL, 198375676560715ULL};
-    print_128_test_result(a_b_result, a_b_expected, "Addition test 1", &test_results);
+    uint128_t a_b_result = add_uint128(a_test, b_test);
+    uint128_t a_b_expected = {198375676560715ULL, 984462842346ULL};
+    print_uint128_test_result(a_b_result, a_b_expected, "Addition test 1", &test_results);
+  }
+  {
+    uint128_t a_test = {0xa6e85ac4e8697c86ULL, 0x5f75288acbb2137eULL};
+
+    uint128_t a_b_result = bitshift_uint128_right(a_test, 12);
+    uint128_t a_b_expected = {0x000a6e85ac4e8697ULL, 0xc865f75288acbb21ULL};
+    print_uint128_test_result(a_b_result, a_b_expected, "Right shift test 1", &test_results);
+  }
+  {
+    uint128_t a_test = {0xa6e85ac4e8697c86ULL, 0x5f75288acbb2137eULL};
+
+    uint128_t a_b_result = bitshift_uint128_right(a_test, 68);
+    uint128_t a_b_expected = {0, 0x0a6e85ac4e8697c8ULL};
+    print_uint128_test_result(a_b_result, a_b_expected, "Right shift test 2", &test_results);
   }
 
   printf("\n");
