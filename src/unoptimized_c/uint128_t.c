@@ -46,6 +46,7 @@ int equals_uint128(uint128_t left, uint128_t right) {
   if (left.ls_bytes == right.ls_bytes && left.ms_bytes == right.ms_bytes) {
     return 1;
   }
+  return 0;
 }
 
 uint128_t multiply_uint128(int bit, uint128_t multiplier) {
@@ -80,6 +81,7 @@ uint128_t bitshift_uint128_right(uint128_t input_num,
     result.ls_bytes = input_num.ms_bytes >>
                       (num_bits_to_shift - num_bits_in_unsigned_long_long);
   }
+  return result;
 }
 
 uint128_t subtract_uint128(uint128_t left, uint128_t right) {
@@ -110,7 +112,7 @@ int getBitAtIndex(uint128_t num, int index) {
   }
 
   if (index > 64) {
-    if (((1 << index - 64) & num.ms_bytes) > 0) {
+    if (((1 << (index - 64)) & num.ms_bytes) > 0) {
       return 1;
     }
     return 0;
