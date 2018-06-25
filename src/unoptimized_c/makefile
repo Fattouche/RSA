@@ -3,11 +3,11 @@ SOURCE = runner.c montgomery_multiplication.c
 .PHONY: run
 
 run: runner
-	@${EXECUTABLE}
+	@qemu-arm ${EXECUTABLE}
 
 runner: 
-	@gcc ${SOURCE} -o ${EXECUTABLE}
+	@arm-linux-gcc -static ${SOURCE} -o ${EXECUTABLE}
 
-clean: 
+clean:
 	@rm -rf ${EXECUTABLE}
 

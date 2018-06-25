@@ -1,7 +1,5 @@
 #include "montgomery_multiplication.h"
 
-int getBitAtIndex(unsigned long long num, int index);
-int getNumBits(unsigned long long num);
 // Computes X * Y mod m
 void montgomery_multiplication(uint128_t x_temp, uint128_t y_temp,
                                uint128_t m_temp) {
@@ -25,6 +23,10 @@ void montgomery_multiplication(uint128_t x_temp, uint128_t y_temp,
   if (T >= m) {
     T = T - m;
   }
+}
+
+void printNum(uint128_t num) {
+  printf("ms: %llu\nls: %llu\n", num.ms_bytes, num.ls_bytes);
 }
 
 int getBitAtIndex(unsigned long long num, int index) {

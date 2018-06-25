@@ -1,13 +1,14 @@
+#ifndef MONTGOMERY_MULTIPLICATION_H
+#define MONTGOMERY_MULTIPLICATION_H
+
 #include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-typedef struct _uint128_t
-{
-    // Least significant 8 bytes
-    unsigned long long ls_bytes;
-
-    // Most significant 8 bytes
-    unsigned long long ms_bytes;
-} uint128_t;
+#include "uint128_t.h"
 
 void montgomery_multiplication();
+int getBitAtIndex(unsigned long long num, int index);
+int getNumBits(unsigned long long num);
+
+#endif // MONTGOMERY_MULTIPLICATION_H
