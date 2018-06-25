@@ -50,6 +50,13 @@ int main()
     uint128_t a_b_expected = {0, 0x0a6e85ac4e8697c8ULL};
     print_uint128_test_result(a_b_result, a_b_expected, "Right shift test 2", &test_results);
   }
+  {
+    uint128_t a_test = {0ULL, 22ULL};
+
+    uint128_t a_b_result = bitshift_uint128_right(a_test, 1);
+    uint128_t a_b_expected = {0, 11ULL};
+    print_uint128_test_result(a_b_result, a_b_expected, "Right shift test 3", &test_results);
+  }
 
   printf("\n");
   printf("***** All Tests Run ******\n");
