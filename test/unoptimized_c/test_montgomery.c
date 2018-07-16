@@ -65,6 +65,15 @@ int main() {
     print_uint128_test_result(result, expected, "Subtraction test 1",
                               &test_results);
   }
+  {
+    uint128_t a = {0x7ef335f0ec621ad5ULL, 0x067aee5395f1d54cULL};
+    uint128_t b = {0x62a1951fce42e145ULL, 0x2092c5b9b087254fULL};
+
+    uint128_t result = subtract_uint128(a, b);
+    uint128_t expected = {0x1c51a0d11e1f398fULL, 0xe5e82899e56aaffdULL};
+    print_uint128_test_result(result, expected, "Subtraction test 1",
+                              &test_results);
+  }
 
   printf("\n");
   printf("***** All Tests Run ******\n");
