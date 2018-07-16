@@ -8,9 +8,9 @@ run: $(EXECUTABLE)
 	@qemu-arm $(EXECUTABLE)
 
 $(EXECUTABLE): $(SOURCE) $(HEADERS)
-	@arm-linux-gcc -static -o $@ $(SOURCE) -Wall -I ${SRC_DIR}
+	@mkdir -p ${BUILD_DIR} && arm-linux-gcc -static -o $@ $(SOURCE) -Wall -I ${SRC_DIR}
 
 .PHONY: clean
 
 clean:
-	rm -f ${EXECUTABLE}
+	@rm -rfv ${BUILD_DIR}/*
