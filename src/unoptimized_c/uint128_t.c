@@ -87,9 +87,8 @@ uint128_t bitshift_uint128_right(uint128_t input_num,
 uint128_t subtract_uint128(uint128_t left, uint128_t right) {
   if (left.ms_bytes < right.ms_bytes) {
     error("Underflow on 128 bit subtraction\n");
-  } 
-  else if (left.ms_bytes == right.ms_bytes 
-            && left.ls_bytes < right.ms_bytes) {
+  } else if (left.ms_bytes == right.ms_bytes &&
+             left.ls_bytes < right.ms_bytes) {
     error("Underflow on 128 bit subtraction\n");
   }
 
@@ -105,7 +104,7 @@ uint128_t subtract_uint128(uint128_t left, uint128_t right) {
 
   result.ms_bytes = left.ms_bytes - right.ms_bytes;
 
-  return result;  
+  return result;
 }
 
 int greater_than_or_equal_uint128(uint128_t left, uint128_t right) {
@@ -121,7 +120,8 @@ int greater_than_or_equal_uint128(uint128_t left, uint128_t right) {
 }
 
 void printNum(uint128_t num) {
-  printf("ms: %llu\nls: %llu\n", num.ms_bytes, num.ls_bytes);
+  printf("%llx%llx\n", num.ms_bytes & 0xffffffffffffffff,
+         num.ls_bytes & 0xffffffffffffffff);
 }
 
 int getBitAtIndex(uint128_t num, int index) {

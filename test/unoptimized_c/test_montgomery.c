@@ -12,12 +12,26 @@ void print_uint128_test_result(uint128_t actual, uint128_t expected,
                                const char* description, results* test_results) {
   if (equals_uint128(actual, expected)) {
     (test_results->passed)++;
+  } else {
+    (test_results->failed)++;
+    printf("%s failed: ", description);
+    printf("\nExpected: ");
+    printNum(expected);
+    printf("Actual: ");
+    printNum(actual);
+  }
+}
+
+void print_int_test_result(int actual, int expected, const char* description,
+                           results* test_results) {
+  if (actual == expected) {
+    (test_results->passed)++;
     // printf("%s\n", description);
   } else {
     (test_results->failed)++;
     printf("%s failed: ", description);
-    printf("Expected: %llu, %llu ", expected.ms_bytes, expected.ls_bytes);
-    printf("Actual: %llu, %llu\n", actual.ms_bytes, actual.ls_bytes);
+    printf("Expected: %d", expected);
+    printf("Actual: %d", actual);
   }
 }
 
@@ -69,13 +83,14 @@ int main() {
                               "Low Montgomery multiplication test",
                               &test_results);
   }
+
   {
-    uint128_t x_test = {0x0e5d556bfe0534d9ULL, 0xd547b56db6b2b730ULL};
-    uint128_t y_test = {0x713025f4a7519418ULL, 0x4f0c07394b3a96eeULL};
-    uint128_t m_test = {0ULL, 23ULL};
+    uint128_t x_test = {0xc6beec7602f3b06ULL, 0x5bb2ac322c1f95e1ULL};
+    uint128_t y_test = {0xf665ffaa6dd4204ULL, 0xb29c6ad048eb9fb1ULL};
+    uint128_t m_test = {0xfb10458be6c5468ULL, 0xe0b603ea54d107edULL};
 
     uint128_t mont_result = montgomery_multiplication(x_test, y_test, m_test);
-    uint128_t mont_expected = {0LL, 13ULL};
+    uint128_t mont_expected = {0x96b78d556a6a125LL, 0x3ff74a4cb7160fecULL};
 
     print_uint128_test_result(mont_result, mont_expected,
                               "High Montgomery multiplication test",
@@ -98,6 +113,20 @@ int main() {
     uint128_t expected = {0x1c51a0d11e1f398fULL, 0xe5e82899e56aaffdULL};
     print_uint128_test_result(result, expected, "Subtraction test 1",
                               &test_results);
+  }
+  {
+    uint128_t a = {0ULL, 0ULL};
+    uint128_t b = {0x62a1951fce42e145ULL, 0x2092c5b9b087254fULL};
+
+    int result = greater_than_or_equal_uint128(a, b);
+    int expected = 0;
+    print_int_test_result(result, expected, "Subtraction test 1",
+                          &test_results);
+
+    result = greater_than_or_equal_uint128(b, a);
+    expected = 1;
+    print_int_test_result(result, expected, "Subtraction test 1",
+                          &test_results);
   }
 
   printf("\n");
