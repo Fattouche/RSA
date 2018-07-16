@@ -56,6 +56,15 @@ int main() {
     uint128_t a_b_expected = {0, 11ULL};
     print_uint128_test_result(a_b_result, a_b_expected, "Right shift test 3", &test_results);
   }
+  {
+    uint128_t a = {0x7ef335f0ec621ad5ULL, 0x2092c5b9b087254fULL};
+    uint128_t b = {0x62a1951fce42e145ULL, 0x067aee5395f1d54cULL};
+
+    uint128_t result = subtract_uint128(a, b);
+    uint128_t expected = {0x1c51a0d11e1f3990ULL, 0x1a17d7661a955003ULL};
+    print_uint128_test_result(result, expected, "Subtraction test 1",
+                              &test_results);
+  }
 
   printf("\n");
   printf("***** All Tests Run ******\n");
