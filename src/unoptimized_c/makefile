@@ -1,5 +1,5 @@
 EXECUTABLE = ./build/runner
-SOURCE = runner.c montgomery_multiplication.c
+SOURCE = runner.c montgomery_multiplication.c uint128_t.c
 .PHONY: run
 
 run: runner
