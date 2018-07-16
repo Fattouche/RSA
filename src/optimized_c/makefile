@@ -8,7 +8,7 @@ build:
 	@mkdir -p ${BUILD_DIR} && arm-linux-gcc -static ${SOURCE} -o ${EXECUTABLE} -pg 
 
 run: build
-	@GMON_OUT_PREFIX=${PROFILE_OUTPUT}; qemu-arm ${EXECUTABLE}
+	@GMON_OUT_PREFIX=${PROFILE_OUTPUT} qemu-arm ${EXECUTABLE}
 
 # Need to use .* because the file name will be ${PROFILE_OUTPUT}.[pid]
 profile: run
