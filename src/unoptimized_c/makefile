@@ -1,13 +1,14 @@
-EXECUTABLE = ./build/runner
+BUILD_DIR = ./build
+EXECUTABLE = ${BUILD_DIR}/runner
 SOURCE = runner.c montgomery_multiplication.c uint128_t.c
 .PHONY: run
 
-run: runner
+run: build
 	@qemu-arm ${EXECUTABLE}
 
-runner: 
-	@arm-linux-gcc -static ${SOURCE} -o ${EXECUTABLE}
+build: 
+	@mkdir -p ${BUILD_DIR} && arm-linux-gcc -static ${SOURCE} -o ${EXECUTABLE}
 
 clean:
-	@rm -rf ${EXECUTABLE}
+	@rm -rfv ${BUILD_DIR}/*
 

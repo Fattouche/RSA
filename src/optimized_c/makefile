@@ -5,7 +5,7 @@ SOURCE = runner.c montgomery_multiplication.c uint128_t.c
 .PHONY: build
 
 build: 
-	@arm-linux-gcc -static ${SOURCE} -o ${EXECUTABLE} -pg 
+	@mkdir -p ${BUILD_DIR} && arm-linux-gcc -static ${SOURCE} -o ${EXECUTABLE} -pg 
 
 run: build
 	@GMON_OUT_PREFIX=${PROFILE_OUTPUT}; qemu-arm ${EXECUTABLE}
