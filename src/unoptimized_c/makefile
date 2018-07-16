@@ -9,6 +9,9 @@ run: build
 build: 
 	@mkdir -p ${BUILD_DIR} && arm-linux-gcc -static ${SOURCE} -o ${EXECUTABLE}
 
+profile: run
+	@gprof ${EXECUTABLE} ${PROFILE_OUTPUT}.*
+
 clean:
 	@rm -rfv ${BUILD_DIR}/*
 
