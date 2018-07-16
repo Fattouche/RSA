@@ -54,7 +54,32 @@ int main() {
 
     uint128_t a_b_result = bitshift_uint128_right(a_test, 1);
     uint128_t a_b_expected = {0, 11ULL};
-    print_uint128_test_result(a_b_result, a_b_expected, "Right shift test 3", &test_results);
+    print_uint128_test_result(a_b_result, a_b_expected, "Right shift test 3",
+                              &test_results);
+  }
+  {
+    uint128_t x_test = {0ULL, 17ULL};
+    uint128_t y_test = {0ULL, 22ULL};
+    uint128_t m_test = {0ULL, 23ULL};
+
+    uint128_t mont_result = montgomery_multiplication(x_test, y_test, m_test);
+    uint128_t mont_expected = {0LL, 16ULL};
+
+    print_uint128_test_result(mont_result, mont_expected,
+                              "Low Montgomery multiplication test",
+                              &test_results);
+  }
+  {
+    uint128_t x_test = {0x0e5d556bfe0534d9ULL, 0xd547b56db6b2b730ULL};
+    uint128_t y_test = {0x713025f4a7519418ULL, 0x4f0c07394b3a96eeULL};
+    uint128_t m_test = {0ULL, 23ULL};
+
+    uint128_t mont_result = montgomery_multiplication(x_test, y_test, m_test);
+    uint128_t mont_expected = {0LL, 13ULL};
+
+    print_uint128_test_result(mont_result, mont_expected,
+                              "High Montgomery multiplication test",
+                              &test_results);
   }
   {
     uint128_t a = {0x7ef335f0ec621ad5ULL, 0x2092c5b9b087254fULL};
