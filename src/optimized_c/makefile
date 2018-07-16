@@ -1,13 +1,20 @@
-EXECUTABLE = ./build/runner
+BUILD_DIR = ./build
+EXECUTABLE = ${BUILD_DIR}/montgomery_multiply
+PROFILE_OUTPUT = ${BUILD_DIR}/gmon
 SOURCE = runner.c montgomery_multiplication.c uint128_t.c
-.PHONY: run
+.PHONY: build
 
-run: runner
-	@qemu-arm ${EXECUTABLE}
+build: 
+	@arm-linux-gcc -static ${SOURCE} -o ${EXECUTABLE} -pg 
 
-runner: 
-	@arm-linux-gcc -static ${SOURCE} -o ${EXECUTABLE}
+run: build
+	@GMON_OUT_PREFIX=${PROFILE_OUTPUT}; qemu-arm ${EXECUTABLE}
 
+# Need to use .* because the file name will be ${PROFILE_OUTPUT}.[pid]
+profile: run
+	@gprof ${EXECUTABLE} ${PROFILE_OUTPUT}.*
+	
+
+# Delete contents of build directory
 clean:
-	@rm -rf ${EXECUTABLE}
-
+	@rm -rfv ${BUILD_DIR}/* 
