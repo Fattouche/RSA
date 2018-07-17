@@ -125,17 +125,17 @@ void print_uint128(uint128_t num) {
 
 int getBitAtIndex(uint128_t num, int index) {
   if (index > 127) {
-    return -1;
+    error("Bit index out of range");
   }
 
-  if (index > 64) {
-    if (((1 << (index - 64)) & num.ms_bytes) > 0) {
+  if (index >= 64) {
+    if ((((unsigned long long)1 << (index - 64)) & num.ms_bytes) > 0) {
       return 1;
     }
     return 0;
   }
 
-  if (((1 << index) & num.ls_bytes) > 0) {
+  if ((((unsigned long long)1 << index) & num.ls_bytes) > 0) {
     return 1;
   }
   return 0;
