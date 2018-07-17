@@ -1,4 +1,5 @@
 #include "montgomery_multiplication.h"
+int DEBUG = 0;
 
 // Computes X * Y mod m
 uint128_t montgomery_multiplication(uint128_t x, uint128_t y, uint128_t m) {
@@ -11,7 +12,9 @@ uint128_t montgomery_multiplication(uint128_t x, uint128_t y, uint128_t m) {
   int loopLimit = getNumBits(m);
   // printf("Starting!\n");
   // printf("y0: %d, looplimit: %d, x: ", y0, loopLimit);
-
+  if (DEBUG) {
+    printf("i  Xi  T(0)+X(i)*Y(0)=n  (T+X(i)*Y+n*M)/2=T\n");
+  }
   for (i = 0; i < loopLimit; i++) {
     t0 = getBitAtIndex(T, 0);
     Xi = getBitAtIndex(x, i);
@@ -19,12 +22,27 @@ uint128_t montgomery_multiplication(uint128_t x, uint128_t y, uint128_t m) {
     n = (t0 | xANDy);
     XiTimesY = multiply_uint128(Xi, y);
     NTimesM = multiply_uint128(n, m);
+    int prev_T = T.ls_bytes;
     //  T = (T + Xi * y + n * m) >> 1;
     T = bitshift_uint128_right((add_uint128(add_uint128(T, XiTimesY), NTimesM)),
                                1);
+    if (DEBUG) {
+      // currently only works when the uint_128 only uses least significant
+      printf(
+          "%d  %d    %d + %d*%d = %d      (%d + %d*%llu + %d*%llu)/2 = "
+          "%llu\n\n",
+          i, Xi, t0, Xi, y0, n, prev_T, Xi, y.ls_bytes, n, m.ls_bytes,
+          T.ls_bytes);
+    }
   }
   if (greater_than_or_equal_uint128(T, m)) {
     T = subtract_uint128(T, m);
   }
+  if (DEBUG) {
+    printf("T = ");
+    print_uint128(T);
+    printf("\n\n");
+  }
+
   return T;
 }

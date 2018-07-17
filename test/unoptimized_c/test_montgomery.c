@@ -86,9 +86,9 @@ int main() {
   }
 
   {
-    uint128_t x_test = {0xc6beec7602f3b06ULL, 0x5bb2ac322c1f95e1ULL};
-    uint128_t y_test = {0xf665ffaa6dd4204ULL, 0xb29c6ad048eb9fb1ULL};
-    uint128_t m_test = {0xfb10458be6c5468ULL, 0xe0b603ea54d107edULL};
+    uint128_t x_test = {0x0ULL, 0x62ULL};
+    uint128_t y_test = {0x0ULL, 0x75ULL};
+    uint128_t m_test = {0x0ULL, 0x5dULL};
 
     uint128_t mont_result = montgomery_multiplication(x_test, y_test, m_test);
     uint128_t mont_expected = {0xf8dcdc8e57bc403LL, 0xf1e937f6a7d35a5aULL};

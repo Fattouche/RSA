@@ -49,13 +49,14 @@ def get_hex(val):
     return ('0x{}'.format(format(val, '032x')))
 
 
-x = 0x0c6beec7602f3b065bb2ac322c1f95e1
-y = 0x0f665ffaa6dd4204b29c6ad048eb9fb1
-m = 0x0fb10458be6c5468e0b603ea54d107ed
+x = 98
+y = 117
+m = 93
 
 #x = 17
 #y = 22
 #m = 23
+
 bit_length = m.bit_length()
 r_inv = modInverse(2**bit_length, m)
 calculation = calculate(x, y, r_inv, m)
