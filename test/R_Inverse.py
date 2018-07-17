@@ -37,11 +37,15 @@ def modInverse(a, m):
     if (x < 0):
         x = x + m0
 
-    return ('0x{}'.format(format(x, '016x')))
+    return x
 
 
 def calculate(x, y, r_inv, m):
     val = (x*y*r_inv) % m
+    return val
+
+
+def get_hex(val):
     return ('0x{}'.format(format(val, '032x')))
 
 
@@ -54,6 +58,7 @@ m = 0x0fb10458be6c5468e0b603ea54d107ed
 #m = 23
 bit_length = m.bit_length()
 r_inv = modInverse(2**bit_length, m)
-calculation = calculate(x, y, int(r_inv, 0), m)
-print("Modular multiplicative inverse is", r_inv)
-print("Calculation is: ", calculation)
+calculation = calculate(x, y, r_inv, m)
+print("Modular multiplicative inverse is", get_hex(r_inv))
+print(
+    "Calculation of\n  {0} (x)\n* {1} (y)\n* {2} (r_inv)\n% {3} (m)\n\n= {4} (T)".format(get_hex(x), get_hex(y), get_hex(r_inv), get_hex(m), get_hex(calculation)))
