@@ -20,6 +20,19 @@ int main() {
                               &test_results);
   }
 
+  {
+    uint128_t a_test = {0x0ULL, 0xc6beeULL};
+    uint128_t b_test = {0x0ULL, 0xf665fULL};
+    uint128_t m_test = {0x0ULL, 0xfb109ULL};
+
+    uint128_t mont_result = montgomery_exponentiation(a_test, b_test, m_test);
+    uint128_t mont_expected = {0LL, 0xbfe74ULL};
+
+    print_uint128_test_result(mont_result, mont_expected,
+                              "High Montgomery exponentiation test",
+                              &test_results);
+  }
+
   printf("\n");
   printf("***** All Tests Run ******\n");
   printf("Passed: %d\n", test_results.passed);
