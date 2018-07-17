@@ -120,8 +120,7 @@ int greater_than_or_equal_uint128(uint128_t left, uint128_t right) {
 }
 
 void printNum(uint128_t num) {
-  printf("%llx%llx\n", num.ms_bytes & 0xffffffffffffffff,
-         num.ls_bytes & 0xffffffffffffffff);
+  printf("0x%016llx%016llx", num.ms_bytes, num.ls_bytes);
 }
 
 int getBitAtIndex(uint128_t num, int index) {
