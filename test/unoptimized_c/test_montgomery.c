@@ -91,7 +91,7 @@ int main() {
     uint128_t m_test = {0xfb10458be6c5468ULL, 0xe0b603ea54d107edULL};
 
     uint128_t mont_result = montgomery_multiplication(x_test, y_test, m_test);
-    uint128_t mont_expected = {0x96b78d556a6a125LL, 0x3ff74a4cb7160fecULL};
+    uint128_t mont_expected = {0xf8dcdc8e57bc403LL, 0xf1e937f6a7d35a5aULL};
 
     print_uint128_test_result(mont_result, mont_expected,
                               "High Montgomery multiplication test",
