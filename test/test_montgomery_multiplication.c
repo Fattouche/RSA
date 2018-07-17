@@ -3,7 +3,7 @@
 
 #include <montgomery_multiplication.h>
 #include <uint128_t.h>
-#include <helper.c>
+#include "helper.h"
 
 int main() {
   results test_results = {0, 0};

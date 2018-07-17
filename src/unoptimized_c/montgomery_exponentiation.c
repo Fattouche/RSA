@@ -1,4 +1,4 @@
-#include "montgomery_multiplication.h"
+#include "montgomery_exponentiation.h"
 
 // Computes x^e mod m
 uint128_t montgomery_exponentiation(uint128_t x, uint128_t e, uint128_t m) {
@@ -6,7 +6,6 @@ uint128_t montgomery_exponentiation(uint128_t x, uint128_t e, uint128_t m) {
   uint128_t p = x;
   int i;
   int loop_limit = getNumBits(m);
-
   for (i = 0; i < loop_limit; i++) {
     if (getBitAtIndex(e, i)) {
       z = montgomery_multiplication(z, p, m);
