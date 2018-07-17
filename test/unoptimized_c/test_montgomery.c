@@ -16,9 +16,10 @@ void print_uint128_test_result(uint128_t actual, uint128_t expected,
     (test_results->failed)++;
     printf("%s failed: ", description);
     printf("\nExpected: ");
-    printNum(expected);
-    printf("Actual: ");
-    printNum(actual);
+    print_uint128(expected);
+    printf("\nActual  : ");
+    print_uint128(actual);
+    printf("\n");
   }
 }
 

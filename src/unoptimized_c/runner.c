@@ -5,6 +5,6 @@ int main() {
   uint128_t y = {0, 22ULL};
   uint128_t m = {0, 23ULL};
   uint128_t result = montgomery_multiplication(x, y, m);
-  printNum(result);
+  print_uint128(result);
   return 0;
 }

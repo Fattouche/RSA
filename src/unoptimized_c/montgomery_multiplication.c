@@ -9,6 +9,8 @@ uint128_t montgomery_multiplication(uint128_t x, uint128_t y, uint128_t m) {
   int i, Xi, xANDy, t0;
   int y0 = getBitAtIndex(y, 0);
   int loopLimit = getNumBits(m);
+  // printf("Starting!\n");
+  // printf("y0: %d, looplimit: %d, x: ", y0, loopLimit);
 
   for (i = 0; i < loopLimit; i++) {
     t0 = getBitAtIndex(T, 0);

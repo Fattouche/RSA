@@ -119,7 +119,7 @@ int greater_than_or_equal_uint128(uint128_t left, uint128_t right) {
   return 0;
 }
 
-void printNum(uint128_t num) {
+void print_uint128(uint128_t num) {
   printf("0x%016llx%016llx", num.ms_bytes, num.ls_bytes);
 }
 
