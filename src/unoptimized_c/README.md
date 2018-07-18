@@ -4,4 +4,8 @@
 
 ## Running
 
-`build/runner`
+`make run`
+
+## Profiling
+
+`make profile`

@@ -42,7 +42,7 @@ uint128_t multiply_uint128(int bit, uint128_t multiplier);
 int greater_than_or_equal_uint128(uint128_t left, uint128_t right);
 
 // Prints the most and least significant numbers
-void printNum(uint128_t num);
+void print_uint128(uint128_t num);
 
 // Returns the bit(1/0) at the given index
 int getBitAtIndex(uint128_t num, int index);

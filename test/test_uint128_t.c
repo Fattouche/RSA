@@ -2,28 +2,10 @@
 
 #include <montgomery_multiplication.h>
 #include <uint128_t.h>
-
-typedef struct _results {
-  int passed;
-  int failed;
-} results;
-
-void print_uint128_test_result(uint128_t actual, uint128_t expected,
-                               const char* description, results* test_results) {
-  if (equals_uint128(actual, expected)) {
-    (test_results->passed)++;
-    // printf("%s\n", description);
-  } else {
-    (test_results->failed)++;
-    printf("%s failed: ", description);
-    printf("Expected: %llu, %llu ", expected.ms_bytes, expected.ls_bytes);
-    printf("Actual: %llu, %llu\n", actual.ms_bytes, actual.ls_bytes);
-  }
-}
+#include "helper.h"
 
 int main() {
   results test_results = {0, 0};
-
   {
     uint128_t a_test = {348503485ULL, 135321511ULL};
     uint128_t b_test = {198375328057230ULL, 984327520835ULL};
@@ -54,8 +36,10 @@ int main() {
 
     uint128_t a_b_result = bitshift_uint128_right(a_test, 1);
     uint128_t a_b_expected = {0, 11ULL};
-    print_uint128_test_result(a_b_result, a_b_expected, "Right shift test 3", &test_results);
+    print_uint128_test_result(a_b_result, a_b_expected, "Right shift test 3",
+                              &test_results);
   }
+
   {
     uint128_t a = {0x7ef335f0ec621ad5ULL, 0x2092c5b9b087254fULL};
     uint128_t b = {0x62a1951fce42e145ULL, 0x067aee5395f1d54cULL};
@@ -73,6 +57,20 @@ int main() {
     uint128_t expected = {0x1c51a0d11e1f398fULL, 0xe5e82899e56aaffdULL};
     print_uint128_test_result(result, expected, "Subtraction test 1",
                               &test_results);
+  }
+  {
+    uint128_t a = {0ULL, 0ULL};
+    uint128_t b = {0x62a1951fce42e145ULL, 0x2092c5b9b087254fULL};
+
+    int result = greater_than_or_equal_uint128(a, b);
+    int expected = 0;
+    print_int_test_result(result, expected, "Subtraction test 1",
+                          &test_results);
+
+    result = greater_than_or_equal_uint128(b, a);
+    expected = 1;
+    print_int_test_result(result, expected, "Subtraction test 1",
+                          &test_results);
   }
 
   printf("\n");
