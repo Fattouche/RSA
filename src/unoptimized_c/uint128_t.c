@@ -5,6 +5,8 @@ void error(const char* description) {
   exit(1);
 }
 
+// Ignores carry bit, since carry bit is only needed right before the bitshift
+// in montgomery multiplication
 uint128_t and_uint128(uint128_t left, uint128_t right) {
   uint128_t result;
 
@@ -14,6 +16,8 @@ uint128_t and_uint128(uint128_t left, uint128_t right) {
   return result;
 }
 
+// Ignores carry bit, since carry bit is only needed right before the bitshift
+// in montgomery multiplication
 uint128_t or_uint128(uint128_t left, uint128_t right) {
   uint128_t result;
 
@@ -23,46 +27,60 @@ uint128_t or_uint128(uint128_t left, uint128_t right) {
   return result;
 }
 
+// Ignores carry bit of operands, since carry bit is only needed right before 
+// the bitshift in montgomery multiplication
 uint128_t add_uint128(uint128_t left, uint128_t right) {
-  uint128_t result = {0, 0};
+  uint128_t result = {0, 0, 0};
 
   result.ls_bytes = left.ls_bytes + right.ls_bytes;
 
   // Check if overflow occured
+  char ls_overflow = 0;
   if (result.ls_bytes < left.ls_bytes) {
-    result.ms_bytes = 1;
+    ls_overflow = 1;
   }
 
-  result.ms_bytes += (left.ms_bytes + right.ms_bytes);
+  if (left.ms_bytes + ls_overflow < left.ms_bytes)
+  {
+    // Overflow occured; need carry bit
+    result.carry_bit = 1;
+  }
 
-  if (result.ms_bytes < left.ms_bytes) {
-    error("Overflow on addition of 128 bits!\n");
+  result.ms_bytes = (left.ms_bytes + ls_overflow + right.ms_bytes);
+
+  if (result.ms_bytes < left.ms_bytes + ls_overflow) {
+    // Overflow occured; need carry bit
+    result.carry_bit = 1;
   }
 
   return result;
 }
 
 int equals_uint128(uint128_t left, uint128_t right) {
-  if (left.ls_bytes == right.ls_bytes && left.ms_bytes == right.ms_bytes) {
+  if (left.ls_bytes == right.ls_bytes && left.ms_bytes == right.ms_bytes
+      && left.carry_bit == right.carry_bit) {
     return 1;
   }
   return 0;
 }
 
+// Ignores carry bit, since carry bit is only needed right before the bitshift
+// in montgomery multiplication
 uint128_t multiply_uint128(int bit, uint128_t multiplier) {
   if (bit) {
     return multiplier;
   } else {
-    uint128_t ret = {0, 0};
+    uint128_t ret = {0, 0, 0};
     return ret;
   }
 }
+
 
 uint128_t bitshift_uint128_right(uint128_t input_num,
                                  size_t num_bits_to_shift) {
   size_t num_bits_in_unsigned_long_long = CHAR_BIT * sizeof(unsigned long long);
 
-  uint128_t result = {0, 0};
+  uint128_t result = {0, 0, 0};
 
   if (num_bits_to_shift < num_bits_in_unsigned_long_long) {
     result.ls_bytes = input_num.ls_bytes >> num_bits_to_shift;
@@ -73,17 +91,33 @@ uint128_t bitshift_uint128_right(uint128_t input_num,
 
     result.ms_bytes = input_num.ms_bytes >> num_bits_to_shift;
 
+    // Add the carry bit, if appropriate
+    if (input_num.carry_bit == 1) {
+      result.ms_bytes += 
+        ((unsigned long long)1 << (num_bits_in_unsigned_long_long - num_bits_to_shift));
+    }
+
     // Put the crossover bits onto the leftmost part of ls_bytes
     result.ls_bytes |=
         (crossover << (num_bits_in_unsigned_long_long - num_bits_to_shift));
-  } else if (num_bits_to_shift < 2 * num_bits_in_unsigned_long_long) {
+        
+  } else if (num_bits_to_shift < num_bits_in_unsigned_long_long * 2) {
     result.ms_bytes = 0;
     result.ls_bytes = input_num.ms_bytes >>
                       (num_bits_to_shift - num_bits_in_unsigned_long_long);
+
+    // Add the carry bit, if appropriate
+    if (input_num.carry_bit == 1) {
+      result.ls_bytes += 
+        ((unsigned long long)1 << (num_bits_in_unsigned_long_long * 2 - num_bits_to_shift));
+    }
   }
+
   return result;
 }
 
+// Ignores carry bit, since carry bit is only needed right before the bitshift
+// in montgomery multiplication
 uint128_t subtract_uint128(uint128_t left, uint128_t right) {
   if (left.ms_bytes < right.ms_bytes) {
     error("Underflow on 128 bit subtraction\n");
@@ -92,7 +126,7 @@ uint128_t subtract_uint128(uint128_t left, uint128_t right) {
     error("Underflow on 128 bit subtraction\n");
   }
 
-  uint128_t result = {0, 0};
+  uint128_t result = {0, 0, 0};
 
   result.ls_bytes = left.ls_bytes - right.ls_bytes;
 
@@ -107,6 +141,8 @@ uint128_t subtract_uint128(uint128_t left, uint128_t right) {
   return result;
 }
 
+// Ignores carry bit, since carry bit is only needed right before the bitshift
+// in montgomery multiplication
 int greater_than_or_equal_uint128(uint128_t left, uint128_t right) {
   if (left.ms_bytes > right.ms_bytes) {
     return 1;
@@ -120,9 +156,11 @@ int greater_than_or_equal_uint128(uint128_t left, uint128_t right) {
 }
 
 void print_uint128(uint128_t num) {
-  printf("0x%016llx%016llx\n", num.ms_bytes, num.ls_bytes);
+  printf("0x%d%016llx%016llx\n", num.carry_bit, num.ms_bytes, num.ls_bytes);
 }
 
+// Ignores carry bit, since carry bit is only needed right before the bitshift
+// in montgomery multiplication
 int getBitAtIndex(uint128_t num, int index) {
   if (index > 127) {
     error("Bit index out of range");
@@ -141,6 +179,8 @@ int getBitAtIndex(uint128_t num, int index) {
   return 0;
 }
 
+// Ignores carry bit, since carry bit is only needed right before the bitshift
+// in montgomery multiplication
 int getNumBits(uint128_t num) {
   int least_significant = getLongBits(num.ls_bytes);
   int most_significant = getLongBits(num.ms_bytes);
@@ -150,6 +190,8 @@ int getNumBits(uint128_t num) {
   return most_significant + 64;
 }
 
+// Ignores carry bit, since carry bit is only needed right before the bitshift
+// in montgomery multiplication
 int getLongBits(unsigned long long num) {
   int count = 0;
 

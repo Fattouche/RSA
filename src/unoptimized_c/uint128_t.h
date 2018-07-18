@@ -11,6 +11,9 @@ typedef struct _uint128_t {
 
   // Least significant 8 bytes
   unsigned long long ls_bytes;
+
+  // Extra bit in case intermediate values need a carry bit
+  char carry_bit;
 } uint128_t;
 
 // Prints an error message and kill the program
