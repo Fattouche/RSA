@@ -36,7 +36,14 @@ uint128_t add_uint128(uint128_t left, uint128_t right) {
   result.ms_bytes += (left.ms_bytes + right.ms_bytes);
 
   if (result.ms_bytes < left.ms_bytes) {
-    error("Overflow on addition of 128 bits!\n");
+    printf("Overflow on addition: \n");
+    printf("Left: ");
+    print_uint128(left);
+    printf("Right: ");
+    print_uint128(right);
+    printf("Result: ");
+    print_uint128(result);
+    error("");
   }
 
   return result;
@@ -56,6 +63,15 @@ uint128_t multiply_uint128(int bit, uint128_t multiplier) {
     uint128_t ret = {0, 0};
     return ret;
   }
+}
+
+// Cailan implement this, return r^2
+uint128_t get_r_uint128(uint128_t modular) {
+  /*
+   * (1 << (2 * num_bits(modular))) % modular
+   */
+  uint128_t r = {0ULL, 1179ULL};
+  return r;
 }
 
 uint128_t bitshift_uint128_right(uint128_t input_num,

@@ -38,6 +38,9 @@ uint128_t bitshift_uint128_right(uint128_t input_num, size_t num_bits_to_shift);
 // Multiplies a uint128_t by 1 or 0
 uint128_t multiply_uint128(int bit, uint128_t multiplier);
 
+// Returns r
+uint128_t get_r_uint128(uint128_t modular);
+
 // Returns 1 if left >= right, 0 otherwise
 int greater_than_or_equal_uint128(uint128_t left, uint128_t right);
 
