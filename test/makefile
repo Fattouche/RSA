@@ -23,6 +23,7 @@ UINT128_EXE = ${BUILD_DIR}/test_${MODE}_uint128_t
 PROFILE_OUTPUT = ${BUILD_DIR}/gmon
 
 run: run_mult run_exp run_uint128_t
+profile: profile_exp 
 
 run_mult: build_mult
 	@GMON_OUT_PREFIX=${PROFILE_OUTPUT} qemu-arm ${MULT_EXE}
@@ -32,7 +33,7 @@ build_mult:
 
 # Need to use .* because the file name will be ${PROFILE_OUTPUT}.[pid]
 profile_mult: run_mult
-	@gprof ${EXECUTABLE} ${PROFILE_OUTPUT}.*
+	@gprof ${MULT_EXE} ${PROFILE_OUTPUT}.*
 
 
 
@@ -44,7 +45,7 @@ build_exp:
 
 # Need to use .* because the file name will be ${PROFILE_OUTPUT}.[pid]
 profile_exp: run_exp
-	@gprof ${EXECUTABLE} ${PROFILE_OUTPUT}.*
+	@gprof ${EXP_EXE} ${PROFILE_OUTPUT}.*
 
 
 run_uint128_t: build_uint128_t
@@ -55,7 +56,7 @@ build_uint128_t:
 
 # Need to use .* because the file name will be ${PROFILE_OUTPUT}.[pid]
 profile_uint128_t: run_uint128_t
-	@gprof ${EXECUTABLE} ${PROFILE_OUTPUT}.*
+	@gprof ${UINT128_EXE} ${PROFILE_OUTPUT}.*
 	
 
 # Delete contents of build directory
