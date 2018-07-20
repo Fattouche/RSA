@@ -7,19 +7,19 @@
 
 int main() {
   results test_results = {0, 0};
-  {
-    uint128_t a_test = {0ULL, 855ULL};
-    uint128_t e_test = {0ULL, 2753ULL};
-    uint128_t m_test = {0ULL, 3233ULL};
-    uint128_t r_squared_mod_m = {0ULL, 1179ULL};
-    uint128_t mont_result =
-        montgomery_exponentiation(a_test, e_test, m_test, r_squared_mod_m);
-    uint128_t mont_expected = {0LL, 123ULL};
+  // {
+  //   uint128_t a_test = {0ULL, 855ULL};
+  //   uint128_t e_test = {0ULL, 2753ULL};
+  //   uint128_t m_test = {0ULL, 3233ULL};
+  //   uint128_t r_squared_mod_m = {0ULL, 1179ULL};
+  //   uint128_t mont_result =
+  //       montgomery_exponentiation(a_test, e_test, m_test, r_squared_mod_m);
+  //   uint128_t mont_expected = {0LL, 123ULL};
 
-    print_uint128_test_result(mont_result, mont_expected,
-                              "Low Montgomery exponentiation test",
-                              &test_results);
-  }
+  //   print_uint128_test_result(mont_result, mont_expected,
+  //                             "Low Montgomery exponentiation test",
+  //                             &test_results);
+  // }
 
   {
     uint128_t a_test = {0xc6beec7602f3b06ULL, 0x5bb2ac322c1f95e1ULL};
