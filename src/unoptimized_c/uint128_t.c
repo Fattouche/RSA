@@ -65,15 +65,6 @@ uint128_t multiply_uint128(int bit, uint128_t multiplier) {
   }
 }
 
-// Cailan implement this, return r^2
-uint128_t get_r_uint128(uint128_t modular) {
-  /*
-   * (1 << (2 * num_bits(modular))) % modular
-   */
-  uint128_t r = {0ULL, 1179ULL};
-  return r;
-}
-
 uint128_t bitshift_uint128_right(uint128_t input_num,
                                  size_t num_bits_to_shift) {
   size_t num_bits_in_unsigned_long_long = CHAR_BIT * sizeof(unsigned long long);
@@ -136,7 +127,7 @@ int greater_than_or_equal_uint128(uint128_t left, uint128_t right) {
 }
 
 void print_uint128(uint128_t num) {
-  printf("0x%016llx%016llx\n", num.ms_bytes, num.ls_bytes);
+  printf("0x%016llx%016llx", num.ms_bytes, num.ls_bytes);
 }
 
 int getBitAtIndex(uint128_t num, int index) {
