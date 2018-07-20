@@ -13,7 +13,7 @@ int main() {
     uint128_t m_test = {0ULL, 23ULL};
 
     uint128_t mont_result =
-        montgomery_multiplication(x_test, y_test, m_test, 5);
+        montgomery_multiplication(x_test, y_test, m_test);
     uint128_t mont_expected = {0LL, 16ULL};
 
     print_uint128_test_result(mont_result, mont_expected,
@@ -27,7 +27,7 @@ int main() {
     uint128_t m_test = {0xfb10458be6c5468ULL, 0xe0b603ea54d107edULL};
 
     uint128_t mont_result =
-        montgomery_multiplication(x_test, y_test, m_test, 124);
+        montgomery_multiplication(x_test, y_test, m_test);
     uint128_t mont_expected = {0x0f8dcdc8e57bc403ULL, 0xf1e937f6a7d35a5aULL};
 
     print_uint128_test_result(mont_result, mont_expected,
@@ -36,7 +36,7 @@ int main() {
   }
 
   printf("\n");
-  printf("***** All Tests Run ******\n");
+  printf("***** All Montgomery Multiplication Tests Run ******\n");
   printf("Passed: %d\n", test_results.passed);
   printf("Failed: %d\n", test_results.failed);
   printf("\n");

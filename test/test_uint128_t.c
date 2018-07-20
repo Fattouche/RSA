@@ -74,7 +74,7 @@ int main() {
   }
 
   printf("\n");
-  printf("***** All Tests Run ******\n");
+  printf("***** All uint128_t Tests Run ******\n");
   printf("Passed: %d\n", test_results.passed);
   printf("Failed: %d\n", test_results.failed);
   printf("\n");
