@@ -6,43 +6,43 @@
 # respect to m using extended Euclid
 # Algorithm Assumption: a and m are
 # coprimes, i.e., gcd(a, m) = 1
-# def modInverse(a, m):
-#     m0 = m
-#     y = 0
-#     x = 1
+def modInverse(a, m):
+    m0 = m
+    y = 0
+    x = 1
 
-#     if (m == 1):
-#         return 0
+    if (m == 1):
+        return 0
 
-#     while (a > 1):
+    while (a > 1):
 
-#         # q is quotient
-#         q = a // m
+        # q is quotient
+        q = a // m
 
-#         t = m
+        t = m
 
-#         # m is remainder now, process
-#         # same as Euclid's algo
-#         m = a % m
-#         a = t
-#         t = y
+        # m is remainder now, process
+        # same as Euclid's algo
+        m = a % m
+        a = t
+        t = y
 
-#         # Update x and y
-#         y = x - q * y
-#         x = t
+        # Update x and y
+        y = x - q * y
+        x = t
 
-#     # Make x positive
-#     if (x < 0):
-#         x = x + m0
+    # Make x positive
+    if (x < 0):
+        x = x + m0
 
-#     return x
+    return x
 
-def modInverse(a, m) :
-    a = a % m
-    for x in range(1, m) :
-        if ((a * x) % m == 1) :
-            return x
-    return 1
+# def modInverse(a, m) :
+#     a = a % m
+#     for x in range(1, m) :
+#         if ((a * x) % m == 1) :
+#             return x
+#     return 1
  
 # # Driver Program
 # a = 3
@@ -77,9 +77,9 @@ def get_hex(val):
     return ('0x{}'.format(format(val, '032x')))
 
 
-x = 981344
-y = 117242
-m = 1113
+x = 0x6cfa30fa91130f5
+y = 0x0c0ed06255619e7
+m = 0xfd5d24299c7efd7
 
 # x = 17
 # y = 22
