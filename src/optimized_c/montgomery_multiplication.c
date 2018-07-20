@@ -1,5 +1,4 @@
 #include "montgomery_multiplication.h"
-// #define DEBUG
 
 // Computes X * Y mod m
 uint128_t montgomery_multiplication(uint128_t x, uint128_t y, uint128_t m) {

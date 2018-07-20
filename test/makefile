@@ -23,7 +23,7 @@ UINT128_EXE = ${BUILD_DIR}/test_${MODE}_uint128_t
 PROFILE_OUTPUT = ${BUILD_DIR}/gmon
 
 run: run_mult run_exp run_uint128_t
-profile: profile_exp 
+profile: clean profile_exp 
 
 run_mult: build_mult
 	@GMON_OUT_PREFIX=${PROFILE_OUTPUT} qemu-arm ${MULT_EXE}
