@@ -125,7 +125,7 @@ void print_uint128(uint128_t num) {
   printf("0x%016llx%016llx", num.ms_bytes, num.ls_bytes);
 }
 
-int getBitAtIndex(uint128_t num, int index) {
+inline int getBitAtIndex(uint128_t num, int index) {
   if (index > 127) {
     error("Bit index out of range");
   }

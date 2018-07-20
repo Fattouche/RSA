@@ -6,14 +6,15 @@ uint128_t montgomery_multiplication(uint128_t x, uint128_t y, uint128_t m) {
   uint128_t XiTimesY;
   uint128_t NTimesM;
   int n;
-  int i, Xi, xANDy, t0;
-  int y0 = getBitAtIndex(y, 0);
+  register int i;
+  int Xi, xANDy, t0;
+  register int y0 = getBitAtIndex(y, 0);
 
-  int m_num_bits = getNumBits(m);
-  int x_num_bits = getNumBits(x);
-  int y_num_bits = getNumBits(y);
+  register int m_num_bits = getNumBits(m);
+  register int x_num_bits = getNumBits(x);
+  register int y_num_bits = getNumBits(y);
 
-  int num_bits = m_num_bits > x_num_bits ? m_num_bits : x_num_bits;
+  register int num_bits = m_num_bits > x_num_bits ? m_num_bits : x_num_bits;
   num_bits = y_num_bits > num_bits ? y_num_bits : num_bits;
 
   for (i = 0; i < num_bits; i++) {
