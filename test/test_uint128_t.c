@@ -15,30 +15,6 @@ int main() {
     print_uint128_test_result(a_b_result, a_b_expected, "Addition test 1",
                               &test_results);
   }
-  {
-    uint128_t a_test = {0xa6e85ac4e8697c86ULL, 0x5f75288acbb2137eULL};
-
-    uint128_t a_b_result = bitshift_uint128_right(a_test, 12);
-    uint128_t a_b_expected = {0x000a6e85ac4e8697ULL, 0xc865f75288acbb21ULL};
-    print_uint128_test_result(a_b_result, a_b_expected, "Right shift test 1",
-                              &test_results);
-  }
-  {
-    uint128_t a_test = {0xa6e85ac4e8697c86ULL, 0x5f75288acbb2137eULL};
-
-    uint128_t a_b_result = bitshift_uint128_right(a_test, 68);
-    uint128_t a_b_expected = {0, 0x0a6e85ac4e8697c8ULL};
-    print_uint128_test_result(a_b_result, a_b_expected, "Right shift test 2",
-                              &test_results);
-  }
-  {
-    uint128_t a_test = {0ULL, 22ULL};
-
-    uint128_t a_b_result = bitshift_uint128_right(a_test, 1);
-    uint128_t a_b_expected = {0, 11ULL};
-    print_uint128_test_result(a_b_result, a_b_expected, "Right shift test 3",
-                              &test_results);
-  }
 
   {
     uint128_t a = {0x7ef335f0ec621ad5ULL, 0x2092c5b9b087254fULL};
