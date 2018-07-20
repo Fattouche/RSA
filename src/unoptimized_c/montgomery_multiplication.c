@@ -1,5 +1,4 @@
 #include "montgomery_multiplication.h"
-//#define DEBUG
 
 // Computes X * Y * R^-1 mod m
 uint128_t montgomery_multiplication(uint128_t X, uint128_t Y, uint128_t M) {
@@ -26,8 +25,8 @@ uint128_t montgomery_multiplication(uint128_t X, uint128_t Y, uint128_t M) {
     n_times_M = multiply_uint128(n, M);
 
     //  T = (T + Xi * Y + n * M) >> 1;
-    T = bitshift_uint128_right((add_uint128(add_uint128(T, Xi_times_Y), n_times_M)),
-                               1);
+    T = bitshift_uint128_right(
+        (add_uint128(add_uint128(T, Xi_times_Y), n_times_M)), 1);
   }
   if (greater_than_or_equal_uint128(T, M)) {
     T = subtract_uint128(T, M);
