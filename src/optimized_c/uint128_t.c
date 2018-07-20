@@ -65,29 +65,24 @@ uint128_t multiply_uint128(int bit, uint128_t multiplier) {
   }
 }
 
-uint128_t bitshift_uint128_right(uint128_t input_num,
-                                 size_t num_bits_to_shift) {
+uint128_t bitshift_uint128_right(uint128_t input_num) {
   size_t num_bits_in_unsigned_long_long = CHAR_BIT * sizeof(unsigned long long);
 
   uint128_t result = {0, 0};
+  size_t num_bits_to_shift = 1;
 
-  if (num_bits_to_shift < num_bits_in_unsigned_long_long) {
-    result.ls_bytes = input_num.ls_bytes >> num_bits_to_shift;
+  result.ls_bytes = input_num.ls_bytes >> num_bits_to_shift;
 
-    // Isolate the bits that are going to be lost by right shifting the ms_bytes
-    unsigned long long crossover =
-        input_num.ms_bytes & ((input_num.ms_bytes << num_bits_to_shift) - 1);
+  // Isolate the bits that are going to be lost by right shifting the ms_bytes
+  unsigned long long crossover =
+      input_num.ms_bytes & ((input_num.ms_bytes << num_bits_to_shift) - 1);
 
-    result.ms_bytes = input_num.ms_bytes >> num_bits_to_shift;
+  result.ms_bytes = input_num.ms_bytes >> num_bits_to_shift;
 
-    // Put the crossover bits onto the leftmost part of ls_bytes
-    result.ls_bytes |=
-        (crossover << (num_bits_in_unsigned_long_long - num_bits_to_shift));
-  } else if (num_bits_to_shift < 2 * num_bits_in_unsigned_long_long) {
-    result.ms_bytes = 0;
-    result.ls_bytes = input_num.ms_bytes >>
-                      (num_bits_to_shift - num_bits_in_unsigned_long_long);
-  }
+  // Put the crossover bits onto the leftmost part of ls_bytes
+  result.ls_bytes |=
+      (crossover << (num_bits_in_unsigned_long_long - num_bits_to_shift));
+
   return result;
 }
 

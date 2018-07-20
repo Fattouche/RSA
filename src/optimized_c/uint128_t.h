@@ -33,7 +33,7 @@ uint128_t subtract_uint128(uint128_t left, uint128_t right);
 int equals_uint128(uint128_t left, uint128_t right);
 
 // Bitshifts a uint128_t to the right
-uint128_t bitshift_uint128_right(uint128_t input_num, size_t num_bits_to_shift);
+uint128_t bitshift_uint128_right(uint128_t input_num);
 
 // Multiplies a uint128_t by 1 or 0
 uint128_t multiply_uint128(int bit, uint128_t multiplier);
