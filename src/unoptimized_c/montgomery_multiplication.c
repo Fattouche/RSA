@@ -1,64 +1,37 @@
 #include "montgomery_multiplication.h"
 //#define DEBUG
 
-// Computes X * Y mod m
-uint128_t montgomery_multiplication(uint128_t x, uint128_t y, uint128_t m) {
+// Computes X * Y * R^-1 mod m
+uint128_t montgomery_multiplication(uint128_t X, uint128_t Y, uint128_t M) {
   uint128_t T = {0, 0};
-  uint128_t XiTimesY;
-  uint128_t NTimesM;
+  uint128_t Xi_times_Y;
+  uint128_t n_times_M;
   int n;
-  int i, Xi, xANDy, t0;
-  int y0 = getBitAtIndex(y, 0);
+  int i, Xi, Xi_and_Y0, T0;
+  int Y0 = getBitAtIndex(Y, 0);
 
-  int m_num_bits = getNumBits(m);
-  int x_num_bits = getNumBits(x);
-  int y_num_bits = getNumBits(y);
+  int M_num_bits = getNumBits(M);
+  int X_num_bits = getNumBits(X);
+  int Y_num_bits = getNumBits(Y);
 
-  int num_bits = m_num_bits > x_num_bits ? m_num_bits : x_num_bits;
-  num_bits = y_num_bits > num_bits ? y_num_bits : num_bits;
-
-#ifdef DEBUG
-  printf("i  Xi  T(0)+X(i)*Y(0)=n  (T+X(i)*Y+n*M)/2=T\n");
-#endif
+  int num_bits = M_num_bits > X_num_bits ? M_num_bits : X_num_bits;
+  num_bits = Y_num_bits > num_bits ? Y_num_bits : num_bits;
 
   for (i = 0; i < num_bits; i++) {
-    t0 = getBitAtIndex(T, 0);
-    Xi = getBitAtIndex(x, i);
-    xANDy = Xi & y0;
-    n = (t0 ^ xANDy);
-    XiTimesY = multiply_uint128(Xi, y);
-    NTimesM = multiply_uint128(n, m);
+    T0 = getBitAtIndex(T, 0);
+    Xi = getBitAtIndex(X, i);
+    Xi_and_Y0 = Xi & Y0;
+    n = (T0 ^ Xi_and_Y0);
+    Xi_times_Y = multiply_uint128(Xi, Y);
+    n_times_M = multiply_uint128(n, M);
 
-#ifdef DEBUG
-    uint128_t prev_T = T;
-#endif
-
-    //  T = (T + Xi * y + n * m) >> 1;
-    T = bitshift_uint128_right((add_uint128(add_uint128(T, XiTimesY), NTimesM)),
+    //  T = (T + Xi * Y + n * M) >> 1;
+    T = bitshift_uint128_right((add_uint128(add_uint128(T, Xi_times_Y), n_times_M)),
                                1);
-
-#ifdef DEBUG
-    // currently only works when the uint_128 only uses least significant
-    printf("%d  %d    %d ^ (%d & %d) = %d      (", i, Xi, t0, Xi, y0, n);
-
-    print_uint128(prev_T);
-    printf(" + %d*", Xi);
-    print_uint128(y);
-    printf(" + %d*", n);
-    print_uint128(m);
-    printf(")/2 = ");
-    print_uint128(T);
-    printf("\n\n");
-#endif
   }
-  if (greater_than_or_equal_uint128(T, m)) {
-    T = subtract_uint128(T, m);
+  if (greater_than_or_equal_uint128(T, M)) {
+    T = subtract_uint128(T, M);
   }
-#ifdef DEBUG
-  printf("T = ");
-  print_uint128(T);
-  printf("\n\n");
-#endif
 
   return T;
 }
