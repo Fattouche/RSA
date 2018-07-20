@@ -36,7 +36,14 @@ uint128_t add_uint128(uint128_t left, uint128_t right) {
   result.ms_bytes += (left.ms_bytes + right.ms_bytes);
 
   if (result.ms_bytes < left.ms_bytes) {
-    error("Overflow on addition of 128 bits!\n");
+    printf("Overflow on addition: \n");
+    printf("Left: ");
+    print_uint128(left);
+    printf("Right: ");
+    print_uint128(right);
+    printf("Result: ");
+    print_uint128(result);
+    error("");
   }
 
   return result;
@@ -120,7 +127,7 @@ int greater_than_or_equal_uint128(uint128_t left, uint128_t right) {
 }
 
 void print_uint128(uint128_t num) {
-  printf("0x%016llx%016llx\n", num.ms_bytes, num.ls_bytes);
+  printf("0x%016llx%016llx", num.ms_bytes, num.ls_bytes);
 }
 
 int getBitAtIndex(uint128_t num, int index) {
