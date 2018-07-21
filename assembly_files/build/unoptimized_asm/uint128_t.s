@@ -1,0 +1,1011 @@
+	.arch armv4t
+	.fpu softvfp
+	.eabi_attribute 20, 1
+	.eabi_attribute 21, 1
+	.eabi_attribute 23, 3
+	.eabi_attribute 24, 1
+	.eabi_attribute 25, 1
+	.eabi_attribute 26, 2
+	.eabi_attribute 30, 6
+	.eabi_attribute 18, 4
+	.file	"uint128_t.c"
+	.section	.rodata
+	.align	2
+.LC0:
+	.ascii	"ERROR: %s\000"
+	.text
+	.align	2
+	.global	error
+	.type	error, %function
+error:
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	push	{lr}
+	bl	__gnu_mcount_nc
+	str	r0, [fp, #-8]
+	ldr	r0, .L3
+	ldr	r1, [fp, #-8]
+	bl	printf
+	mov	r0, #1
+	bl	exit
+.L4:
+	.align	2
+.L3:
+	.word	.LC0
+	.size	error, .-error
+	.align	2
+	.global	and_uint128
+	.type	and_uint128, %function
+and_uint128:
+	@ Function supports interworking.
+	@ args = 32, pretend = 8, frame = 16
+	@ frame_needed = 1, uses_anonymous_args = 0
+	@ link register save eliminated.
+	sub	sp, sp, #8
+	stmfd	sp!, {r4, r5, fp}
+	add	fp, sp, #8
+	sub	sp, sp, #20
+	push	{lr}
+	bl	__gnu_mcount_nc
+	mov	r5, r0
+	add	r1, fp, #4
+	stmia	r1, {r2, r3}
+	add	r2, fp, #12
+	ldmia	r2, {r1-r2}
+	add	r4, fp, #28
+	ldmia	r4, {r3-r4}
+	and	r3, r3, r1
+	and	r4, r4, r2
+	str	r3, [fp, #-20]
+	str	r4, [fp, #-16]
+	ldmib	fp, {r1-r2}
+	add	r4, fp, #20
+	ldmia	r4, {r3-r4}
+	and	r3, r3, r1
+	and	r4, r4, r2
+	str	r3, [fp, #-28]
+	str	r4, [fp, #-24]
+	mov	ip, r5
+	sub	r3, fp, #28
+	ldmia	r3, {r0, r1, r2, r3}
+	stmia	ip, {r0, r1, r2, r3}
+	mov	r0, r5
+	sub	sp, fp, #8
+	ldmfd	sp!, {r4, r5, fp}
+	add	sp, sp, #8
+	bx	lr
+	.size	and_uint128, .-and_uint128
+	.align	2
+	.global	or_uint128
+	.type	or_uint128, %function
+or_uint128:
+	@ Function supports interworking.
+	@ args = 32, pretend = 8, frame = 16
+	@ frame_needed = 1, uses_anonymous_args = 0
+	@ link register save eliminated.
+	sub	sp, sp, #8
+	stmfd	sp!, {r4, r5, fp}
+	add	fp, sp, #8
+	sub	sp, sp, #20
+	push	{lr}
+	bl	__gnu_mcount_nc
+	mov	r5, r0
+	add	r1, fp, #4
+	stmia	r1, {r2, r3}
+	add	r2, fp, #12
+	ldmia	r2, {r1-r2}
+	add	r4, fp, #28
+	ldmia	r4, {r3-r4}
+	orr	r3, r3, r1
+	orr	r4, r4, r2
+	str	r3, [fp, #-20]
+	str	r4, [fp, #-16]
+	ldmib	fp, {r1-r2}
+	add	r4, fp, #20
+	ldmia	r4, {r3-r4}
+	orr	r3, r3, r1
+	orr	r4, r4, r2
+	str	r3, [fp, #-28]
+	str	r4, [fp, #-24]
+	mov	ip, r5
+	sub	r3, fp, #28
+	ldmia	r3, {r0, r1, r2, r3}
+	stmia	ip, {r0, r1, r2, r3}
+	mov	r0, r5
+	sub	sp, fp, #8
+	ldmfd	sp!, {r4, r5, fp}
+	add	sp, sp, #8
+	bx	lr
+	.size	or_uint128, .-or_uint128
+	.section	.rodata
+	.align	3
+	.type	C.0.2167, %object
+	.size	C.0.2167, 16
+C.0.2167:
+	.space	16
+	.align	2
+.LC1:
+	.ascii	"Overflow on addition: \000"
+	.align	2
+.LC2:
+	.ascii	"Left: \000"
+	.align	2
+.LC3:
+	.ascii	"Right: \000"
+	.align	2
+.LC4:
+	.ascii	"Result: \000"
+	.align	2
+.LC5:
+	.ascii	"\000"
+	.text
+	.align	2
+	.global	add_uint128
+	.type	add_uint128, %function
+add_uint128:
+	@ Function supports interworking.
+	@ args = 32, pretend = 8, frame = 56
+	@ frame_needed = 1, uses_anonymous_args = 0
+	sub	sp, sp, #8
+	stmfd	sp!, {r4, r5, r6, fp, lr}
+	add	fp, sp, #16
+	sub	sp, sp, #60
+	push	{lr}
+	bl	__gnu_mcount_nc
+	str	r0, [fp, #-72]
+	add	r1, fp, #4
+	stmia	r1, {r2, r3}
+	ldr	r3, .L17
+	sub	ip, fp, #36
+	ldmia	r3, {r0, r1, r2, r3}
+	stmia	ip, {r0, r1, r2, r3}
+	add	r2, fp, #12
+	ldmia	r2, {r1-r2}
+	add	r4, fp, #28
+	ldmia	r4, {r3-r4}
+	adds	r3, r3, r1
+	adc	r4, r4, r2
+	str	r3, [fp, #-28]
+	str	r4, [fp, #-24]
+	sub	r3, fp, #28
+	ldmia	r3, {r2-r3}
+	str	r2, [fp, #-68]
+	str	r3, [fp, #-64]
+	add	r4, fp, #12
+	ldmia	r4, {r3-r4}
+	str	r3, [fp, #-60]
+	str	r4, [fp, #-56]
+	ldr	r4, [fp, #-56]
+	ldr	r2, [fp, #-64]
+	cmp	r4, r2
+	bhi	.L15
+	ldr	r3, [fp, #-56]
+	ldr	r4, [fp, #-64]
+	cmp	r3, r4
+	bne	.L10
+	ldr	r2, [fp, #-60]
+	ldr	r3, [fp, #-68]
+	cmp	r2, r3
+	bhi	.L15
+	ldr	r4, [fp, #-60]
+	ldr	r2, [fp, #-68]
+	cmp	r4, r2
+	b	.L10
+.L15:
+	mov	r3, #1
+	mov	r4, #0
+	str	r3, [fp, #-36]
+	str	r4, [fp, #-32]
+.L10:
+	sub	r6, fp, #36
+	ldmia	r6, {r5-r6}
+	ldmib	fp, {r1-r2}
+	add	r4, fp, #20
+	ldmia	r4, {r3-r4}
+	adds	r3, r3, r1
+	adc	r4, r4, r2
+	adds	r3, r3, r5
+	adc	r4, r4, r6
+	str	r3, [fp, #-36]
+	str	r4, [fp, #-32]
+	sub	r4, fp, #36
+	ldmia	r4, {r3-r4}
+	str	r3, [fp, #-52]
+	str	r4, [fp, #-48]
+	ldmib	fp, {r2-r3}
+	str	r2, [fp, #-44]
+	str	r3, [fp, #-40]
+	ldr	r3, [fp, #-40]
+	ldr	r4, [fp, #-48]
+	cmp	r3, r4
+	bhi	.L16
+	ldr	r2, [fp, #-40]
+	ldr	r3, [fp, #-48]
+	cmp	r2, r3
+	bne	.L12
+	ldr	r4, [fp, #-44]
+	ldr	r2, [fp, #-52]
+	cmp	r4, r2
+	bhi	.L16
+	ldr	r3, [fp, #-44]
+	ldr	r4, [fp, #-52]
+	cmp	r3, r4
+	b	.L12
+.L16:
+	ldr	r0, .L17+4
+	bl	puts
+	ldr	r0, .L17+8
+	bl	printf
+	add	r3, fp, #4
+	ldmia	r3, {r0, r1, r2, r3}
+	bl	print_uint128
+	ldr	r0, .L17+12
+	bl	printf
+	add	r3, fp, #20
+	ldmia	r3, {r0, r1, r2, r3}
+	bl	print_uint128
+	ldr	r0, .L17+16
+	bl	printf
+	sub	r3, fp, #36
+	ldmia	r3, {r0, r1, r2, r3}
+	bl	print_uint128
+	ldr	r0, .L17+20
+	bl	error
+.L12:
+	ldr	ip, [fp, #-72]
+	sub	r3, fp, #36
+	ldmia	r3, {r0, r1, r2, r3}
+	stmia	ip, {r0, r1, r2, r3}
+	ldr	r0, [fp, #-72]
+	sub	sp, fp, #16
+	ldmfd	sp!, {r4, r5, r6, fp, lr}
+	add	sp, sp, #8
+	bx	lr
+.L18:
+	.align	2
+.L17:
+	.word	C.0.2167
+	.word	.LC1
+	.word	.LC2
+	.word	.LC3
+	.word	.LC4
+	.word	.LC5
+	.size	add_uint128, .-add_uint128
+	.align	2
+	.global	equals_uint128
+	.type	equals_uint128, %function
+equals_uint128:
+	@ Function supports interworking.
+	@ args = 16, pretend = 0, frame = 56
+	@ frame_needed = 1, uses_anonymous_args = 0
+	@ link register save eliminated.
+	stmfd	sp!, {r4, fp}
+	add	fp, sp, #4
+	sub	sp, sp, #56
+	push	{lr}
+	bl	__gnu_mcount_nc
+	sub	ip, fp, #20
+	stmia	ip, {r0, r1, r2, r3}
+	sub	r3, fp, #12
+	ldmia	r3, {r2-r3}
+	str	r2, [fp, #-60]
+	str	r3, [fp, #-56]
+	add	r4, fp, #12
+	ldmia	r4, {r3-r4}
+	str	r3, [fp, #-52]
+	str	r4, [fp, #-48]
+	ldr	r4, [fp, #-60]
+	ldr	r2, [fp, #-52]
+	cmp	r4, r2
+	bne	.L20
+	ldr	r3, [fp, #-56]
+	ldr	r4, [fp, #-48]
+	cmp	r3, r4
+	bne	.L20
+	sub	r3, fp, #20
+	ldmia	r3, {r2-r3}
+	str	r2, [fp, #-44]
+	str	r3, [fp, #-40]
+	ldmib	fp, {r3-r4}
+	str	r3, [fp, #-36]
+	str	r4, [fp, #-32]
+	ldr	r4, [fp, #-44]
+	ldr	r2, [fp, #-36]
+	cmp	r4, r2
+	bne	.L20
+	ldr	r3, [fp, #-40]
+	ldr	r4, [fp, #-32]
+	cmp	r3, r4
+	bne	.L20
+	mov	r2, #1
+	str	r2, [fp, #-24]
+	b	.L21
+.L20:
+	mov	r3, #0
+	str	r3, [fp, #-24]
+.L21:
+	ldr	r3, [fp, #-24]
+	mov	r0, r3
+	sub	sp, fp, #4
+	ldmfd	sp!, {r4, fp}
+	bx	lr
+	.size	equals_uint128, .-equals_uint128
+	.section	.rodata
+	.align	3
+	.type	C.1.2206, %object
+	.size	C.1.2206, 16
+C.1.2206:
+	.space	16
+	.text
+	.align	2
+	.global	multiply_uint128
+	.type	multiply_uint128, %function
+multiply_uint128:
+	@ Function supports interworking.
+	@ args = 16, pretend = 8, frame = 24
+	@ frame_needed = 1, uses_anonymous_args = 0
+	@ link register save eliminated.
+	sub	sp, sp, #8
+	str	fp, [sp, #-4]!
+	add	fp, sp, #0
+	sub	sp, sp, #28
+	push	{lr}
+	bl	__gnu_mcount_nc
+	str	r0, [fp, #-28]
+	str	r1, [fp, #-24]
+	add	r1, fp, #4
+	stmia	r1, {r2, r3}
+	ldr	r3, [fp, #-24]
+	cmp	r3, #0
+	beq	.L24
+	ldr	ip, [fp, #-28]
+	add	r3, fp, #4
+	ldmia	r3, {r0, r1, r2, r3}
+	stmia	ip, {r0, r1, r2, r3}
+	b	.L23
+.L24:
+	ldr	r3, .L27
+	sub	ip, fp, #20
+	ldmia	r3, {r0, r1, r2, r3}
+	stmia	ip, {r0, r1, r2, r3}
+	ldr	ip, [fp, #-28]
+	sub	r3, fp, #20
+	ldmia	r3, {r0, r1, r2, r3}
+	stmia	ip, {r0, r1, r2, r3}
+.L23:
+	ldr	r0, [fp, #-28]
+	add	sp, fp, #0
+	ldmfd	sp!, {fp}
+	add	sp, sp, #8
+	bx	lr
+.L28:
+	.align	2
+.L27:
+	.word	C.1.2206
+	.size	multiply_uint128, .-multiply_uint128
+	.section	.rodata
+	.align	3
+	.type	C.2.2219, %object
+	.size	C.2.2219, 16
+C.2.2219:
+	.space	16
+	.text
+	.align	2
+	.global	bitshift_uint128_right
+	.type	bitshift_uint128_right, %function
+bitshift_uint128_right:
+	@ Function supports interworking.
+	@ args = 20, pretend = 8, frame = 40
+	@ frame_needed = 1, uses_anonymous_args = 0
+	@ link register save eliminated.
+	sub	sp, sp, #8
+	stmfd	sp!, {r4, r5, r6, r7, r8, fp}
+	add	fp, sp, #20
+	sub	sp, sp, #40
+	push	{lr}
+	bl	__gnu_mcount_nc
+	str	r0, [fp, #-56]
+	add	r1, fp, #4
+	stmia	r1, {r2, r3}
+	mov	r3, #64
+	str	r3, [fp, #-32]
+	ldr	r3, .L33
+	sub	ip, fp, #52
+	ldmia	r3, {r0, r1, r2, r3}
+	stmia	ip, {r0, r1, r2, r3}
+	ldr	r2, [fp, #20]
+	ldr	r3, [fp, #-32]
+	cmp	r2, r3
+	bcs	.L30
+	add	r2, fp, #12
+	ldmia	r2, {r1-r2}
+	ldr	r0, [fp, #20]
+	sub	ip, r0, #32
+	mov	r6, r2, lsr ip
+	rsb	r3, r0, #32
+	mov	r5, r2, asl r3
+	cmp	ip, #0
+	mov	r3, r1, lsr r0
+	orr	r3, r5, r3
+	movge	r3, r6
+	mov	r4, r2, lsr r0
+	str	r3, [fp, #-44]
+	str	r4, [fp, #-40]
+	ldmib	fp, {r6-r7}
+	ldmib	fp, {r1-r2}
+	ldr	r0, [fp, #20]
+	sub	ip, r0, #32
+	mov	r8, r1, asl ip
+	rsb	r3, r0, #32
+	mov	r5, r1, lsr r3
+	cmp	ip, #0
+	mov	r4, r2, asl r0
+	orr	r4, r5, r4
+	movge	r4, r8
+	mov	r3, r1, asl r0
+	mvn	r1, #0
+	mvn	r2, #0
+	adds	r3, r3, r1
+	adc	r4, r4, r2
+	and	r3, r3, r6
+	and	r4, r4, r7
+	str	r3, [fp, #-28]
+	str	r4, [fp, #-24]
+	ldmib	fp, {r1-r2}
+	ldr	r0, [fp, #20]
+	sub	ip, r0, #32
+	mov	r6, r2, lsr ip
+	rsb	r3, r0, #32
+	mov	r5, r2, asl r3
+	cmp	ip, #0
+	mov	r3, r1, lsr r0
+	orr	r3, r5, r3
+	movge	r3, r6
+	mov	r4, r2, lsr r0
+	str	r3, [fp, #-52]
+	str	r4, [fp, #-48]
+	sub	r6, fp, #44
+	ldmia	r6, {r5-r6}
+	ldr	r2, [fp, #-32]
+	ldr	r3, [fp, #20]
+	rsb	r3, r3, r2
+	mov	r1, r3
+	sub	r0, r1, #32
+	ldr	r3, [fp, #-28]
+	mov	ip, r3, asl r0
+	rsb	r2, r1, #32
+	ldr	r3, [fp, #-28]
+	mov	r7, r3, lsr r2
+	ldr	r2, [fp, #-24]
+	cmp	r0, #0
+	ldr	r0, [fp, #-28]
+	mov	r4, r2, asl r1
+	orr	r4, r7, r4
+	movge	r4, ip
+	mov	r3, r0, asl r1
+	orr	r3, r3, r5
+	orr	r4, r4, r6
+	str	r3, [fp, #-44]
+	str	r4, [fp, #-40]
+	b	.L31
+.L30:
+	ldr	r3, [fp, #-32]
+	mov	r2, r3, asl #1
+	ldr	r3, [fp, #20]
+	cmp	r2, r3
+	bls	.L31
+	mov	r3, #0
+	mov	r4, #0
+	str	r3, [fp, #-52]
+	str	r4, [fp, #-48]
+	ldmib	fp, {r1-r2}
+	ldr	r0, [fp, #20]
+	ldr	r3, [fp, #-32]
+	rsb	r3, r3, r0
+	mov	r0, r3
+	sub	ip, r0, #32
+	mov	r6, r2, lsr ip
+	rsb	r3, r0, #32
+	mov	r5, r2, asl r3
+	cmp	ip, #0
+	mov	r3, r1, lsr r0
+	orr	r3, r5, r3
+	movge	r3, r6
+	mov	r4, r2, lsr r0
+	str	r3, [fp, #-44]
+	str	r4, [fp, #-40]
+.L31:
+	ldr	ip, [fp, #-56]
+	sub	r3, fp, #52
+	ldmia	r3, {r0, r1, r2, r3}
+	stmia	ip, {r0, r1, r2, r3}
+	ldr	r0, [fp, #-56]
+	sub	sp, fp, #20
+	ldmfd	sp!, {r4, r5, r6, r7, r8, fp}
+	add	sp, sp, #8
+	bx	lr
+.L34:
+	.align	2
+.L33:
+	.word	C.2.2219
+	.size	bitshift_uint128_right, .-bitshift_uint128_right
+	.section	.rodata
+	.align	3
+	.type	C.6.2260, %object
+	.size	C.6.2260, 16
+C.6.2260:
+	.space	16
+	.align	2
+.LC6:
+	.ascii	"Underflow on 128 bit subtraction\012\000"
+	.text
+	.align	2
+	.global	subtract_uint128
+	.type	subtract_uint128, %function
+subtract_uint128:
+	@ Function supports interworking.
+	@ args = 32, pretend = 8, frame = 88
+	@ frame_needed = 1, uses_anonymous_args = 0
+	sub	sp, sp, #8
+	stmfd	sp!, {r4, fp, lr}
+	add	fp, sp, #8
+	sub	sp, sp, #92
+	push	{lr}
+	bl	__gnu_mcount_nc
+	str	r0, [fp, #-96]
+	add	r1, fp, #4
+	stmia	r1, {r2, r3}
+	ldmib	fp, {r2-r3}
+	str	r2, [fp, #-92]
+	str	r3, [fp, #-88]
+	add	r4, fp, #20
+	ldmia	r4, {r3-r4}
+	str	r3, [fp, #-84]
+	str	r4, [fp, #-80]
+	ldr	r4, [fp, #-80]
+	ldr	r2, [fp, #-88]
+	cmp	r4, r2
+	bhi	.L43
+	ldr	r3, [fp, #-80]
+	ldr	r4, [fp, #-88]
+	cmp	r3, r4
+	bne	.L36
+	ldr	r2, [fp, #-84]
+	ldr	r3, [fp, #-92]
+	cmp	r2, r3
+	bhi	.L43
+	ldr	r4, [fp, #-84]
+	ldr	r2, [fp, #-92]
+	cmp	r4, r2
+	b	.L36
+.L43:
+	ldr	r0, .L46
+	bl	error
+	b	.L38
+.L36:
+	ldmib	fp, {r3-r4}
+	str	r3, [fp, #-76]
+	str	r4, [fp, #-72]
+	add	r3, fp, #20
+	ldmia	r3, {r2-r3}
+	str	r2, [fp, #-68]
+	str	r3, [fp, #-64]
+	ldr	r3, [fp, #-76]
+	ldr	r4, [fp, #-68]
+	cmp	r3, r4
+	bne	.L38
+	ldr	r2, [fp, #-72]
+	ldr	r3, [fp, #-64]
+	cmp	r2, r3
+	bne	.L38
+	add	r3, fp, #12
+	ldmia	r3, {r2-r3}
+	str	r2, [fp, #-60]
+	str	r3, [fp, #-56]
+	add	r4, fp, #20
+	ldmia	r4, {r3-r4}
+	str	r3, [fp, #-52]
+	str	r4, [fp, #-48]
+	ldr	r4, [fp, #-48]
+	ldr	r2, [fp, #-56]
+	cmp	r4, r2
+	bhi	.L44
+	ldr	r3, [fp, #-48]
+	ldr	r4, [fp, #-56]
+	cmp	r3, r4
+	bne	.L38
+	ldr	r2, [fp, #-52]
+	ldr	r3, [fp, #-60]
+	cmp	r2, r3
+	bhi	.L44
+	ldr	r4, [fp, #-52]
+	ldr	r2, [fp, #-60]
+	cmp	r4, r2
+	b	.L38
+.L44:
+	ldr	r0, .L46
+	bl	error
+.L38:
+	ldr	r3, .L46+4
+	sub	ip, fp, #28
+	ldmia	r3, {r0, r1, r2, r3}
+	stmia	ip, {r0, r1, r2, r3}
+	add	r2, fp, #12
+	ldmia	r2, {r1-r2}
+	add	r4, fp, #28
+	ldmia	r4, {r3-r4}
+	subs	r3, r1, r3
+	sbc	r4, r2, r4
+	str	r3, [fp, #-20]
+	str	r4, [fp, #-16]
+	sub	r4, fp, #20
+	ldmia	r4, {r3-r4}
+	str	r3, [fp, #-44]
+	str	r4, [fp, #-40]
+	add	r3, fp, #12
+	ldmia	r3, {r2-r3}
+	str	r2, [fp, #-36]
+	str	r3, [fp, #-32]
+	ldr	r3, [fp, #-40]
+	ldr	r4, [fp, #-32]
+	cmp	r3, r4
+	bhi	.L45
+	ldr	r2, [fp, #-40]
+	ldr	r3, [fp, #-32]
+	cmp	r2, r3
+	bne	.L40
+	ldr	r4, [fp, #-44]
+	ldr	r2, [fp, #-36]
+	cmp	r4, r2
+	bhi	.L45
+	ldr	r3, [fp, #-44]
+	ldr	r4, [fp, #-36]
+	cmp	r3, r4
+	b	.L40
+.L45:
+	ldmib	fp, {r3-r4}
+	mvn	r1, #0
+	mvn	r2, #0
+	adds	r3, r3, r1
+	adc	r4, r4, r2
+	stmib	fp, {r3-r4}
+.L40:
+	ldmib	fp, {r1-r2}
+	add	r4, fp, #20
+	ldmia	r4, {r3-r4}
+	subs	r3, r1, r3
+	sbc	r4, r2, r4
+	str	r3, [fp, #-28]
+	str	r4, [fp, #-24]
+	ldr	ip, [fp, #-96]
+	sub	r3, fp, #28
+	ldmia	r3, {r0, r1, r2, r3}
+	stmia	ip, {r0, r1, r2, r3}
+	ldr	r0, [fp, #-96]
+	sub	sp, fp, #8
+	ldmfd	sp!, {r4, fp, lr}
+	add	sp, sp, #8
+	bx	lr
+.L47:
+	.align	2
+.L46:
+	.word	.LC6
+	.word	C.6.2260
+	.size	subtract_uint128, .-subtract_uint128
+	.align	2
+	.global	greater_than_or_equal_uint128
+	.type	greater_than_or_equal_uint128, %function
+greater_than_or_equal_uint128:
+	@ Function supports interworking.
+	@ args = 16, pretend = 0, frame = 72
+	@ frame_needed = 1, uses_anonymous_args = 0
+	@ link register save eliminated.
+	stmfd	sp!, {r4, fp}
+	add	fp, sp, #4
+	sub	sp, sp, #72
+	push	{lr}
+	bl	__gnu_mcount_nc
+	sub	ip, fp, #20
+	stmia	ip, {r0, r1, r2, r3}
+	sub	r3, fp, #20
+	ldmia	r3, {r2-r3}
+	str	r2, [fp, #-76]
+	str	r3, [fp, #-72]
+	ldmib	fp, {r3-r4}
+	str	r3, [fp, #-68]
+	str	r4, [fp, #-64]
+	ldr	r4, [fp, #-72]
+	ldr	r2, [fp, #-64]
+	cmp	r4, r2
+	bhi	.L55
+	ldr	r3, [fp, #-72]
+	ldr	r4, [fp, #-64]
+	cmp	r3, r4
+	bne	.L49
+	ldr	r2, [fp, #-76]
+	ldr	r3, [fp, #-68]
+	cmp	r2, r3
+	bhi	.L55
+	ldr	r4, [fp, #-76]
+	ldr	r2, [fp, #-68]
+	cmp	r4, r2
+	b	.L49
+.L55:
+	mov	r3, #1
+	str	r3, [fp, #-56]
+	b	.L51
+.L49:
+	sub	r3, fp, #20
+	ldmia	r3, {r2-r3}
+	str	r2, [fp, #-52]
+	str	r3, [fp, #-48]
+	ldmib	fp, {r3-r4}
+	str	r3, [fp, #-44]
+	str	r4, [fp, #-40]
+	ldr	r4, [fp, #-52]
+	ldr	r2, [fp, #-44]
+	cmp	r4, r2
+	bne	.L52
+	ldr	r3, [fp, #-48]
+	ldr	r4, [fp, #-40]
+	cmp	r3, r4
+	bne	.L52
+	sub	r2, fp, #20
+	ldmia	r2, {r1-r2}
+	mov	r3, r1
+	orr	r3, r3, r2
+	cmp	r3, #0
+	bne	.L52
+	sub	r3, fp, #12
+	ldmia	r3, {r2-r3}
+	str	r2, [fp, #-36]
+	str	r3, [fp, #-32]
+	add	r4, fp, #12
+	ldmia	r4, {r3-r4}
+	str	r3, [fp, #-28]
+	str	r4, [fp, #-24]
+	ldr	r4, [fp, #-24]
+	ldr	r2, [fp, #-32]
+	cmp	r4, r2
+	bhi	.L52
+	ldr	r3, [fp, #-24]
+	ldr	r4, [fp, #-32]
+	cmp	r3, r4
+	bne	.L56
+	ldr	r2, [fp, #-28]
+	ldr	r3, [fp, #-36]
+	cmp	r2, r3
+	bhi	.L52
+	ldr	r4, [fp, #-28]
+	ldr	r2, [fp, #-36]
+	cmp	r4, r2
+.L56:
+	mov	r3, #1
+	str	r3, [fp, #-56]
+	b	.L51
+.L52:
+	mov	r4, #0
+	str	r4, [fp, #-56]
+.L51:
+	ldr	r3, [fp, #-56]
+	mov	r0, r3
+	sub	sp, fp, #4
+	ldmfd	sp!, {r4, fp}
+	bx	lr
+	.size	greater_than_or_equal_uint128, .-greater_than_or_equal_uint128
+	.section	.rodata
+	.align	2
+.LC7:
+	.ascii	"0x%016llx%016llx\000"
+	.text
+	.align	2
+	.global	print_uint128
+	.type	print_uint128, %function
+print_uint128:
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 16
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {r4, fp, lr}
+	add	fp, sp, #8
+	sub	sp, sp, #28
+	push	{lr}
+	bl	__gnu_mcount_nc
+	sub	ip, fp, #28
+	stmia	ip, {r0, r1, r2, r3}
+	sub	r2, fp, #28
+	ldmia	r2, {r1-r2}
+	sub	r4, fp, #20
+	ldmia	r4, {r3-r4}
+	stmia	sp, {r3-r4}
+	ldr	r0, .L59
+	mov	r3, r2
+	mov	r2, r1
+	bl	printf
+	sub	sp, fp, #8
+	ldmfd	sp!, {r4, fp, lr}
+	bx	lr
+.L60:
+	.align	2
+.L59:
+	.word	.LC7
+	.size	print_uint128, .-print_uint128
+	.section	.rodata
+	.align	2
+.LC8:
+	.ascii	"Bit index out of range\000"
+	.text
+	.align	2
+	.global	getBitAtIndex
+	.type	getBitAtIndex, %function
+getBitAtIndex:
+	@ Function supports interworking.
+	@ args = 4, pretend = 0, frame = 24
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {r4, r5, r6, fp, lr}
+	add	fp, sp, #16
+	sub	sp, sp, #28
+	push	{lr}
+	bl	__gnu_mcount_nc
+	sub	ip, fp, #36
+	stmia	ip, {r0, r1, r2, r3}
+	ldr	r3, [fp, #4]
+	cmp	r3, #127
+	ble	.L62
+	ldr	r0, .L68
+	bl	error
+.L62:
+	ldr	r3, [fp, #4]
+	cmp	r3, #63
+	ble	.L63
+	sub	r2, fp, #36
+	ldmia	r2, {r1-r2}
+	ldr	r3, [fp, #4]
+	sub	r0, r3, #64
+	sub	ip, r0, #32
+	mov	r6, r2, lsr ip
+	rsb	r3, r0, #32
+	mov	r5, r2, asl r3
+	cmp	ip, #0
+	mov	r3, r1, lsr r0
+	orr	r3, r5, r3
+	movge	r3, r6
+	mov	r4, r2, lsr r0
+	and	r3, r3, #1
+	and	r3, r3, #255
+	cmp	r3, #0
+	beq	.L64
+	mov	r3, #1
+	str	r3, [fp, #-40]
+	b	.L65
+.L64:
+	mov	r3, #0
+	str	r3, [fp, #-40]
+	b	.L65
+.L63:
+	sub	r2, fp, #28
+	ldmia	r2, {r1-r2}
+	ldr	r3, [fp, #4]
+	sub	r0, r3, #32
+	mov	r5, r2, lsr r0
+	ldr	r3, [fp, #4]
+	rsb	r3, r3, #32
+	mov	r6, r2, asl r3
+	ldr	ip, [fp, #4]
+	cmp	r0, #0
+	ldr	r0, [fp, #4]
+	mov	r3, r1, lsr ip
+	orr	r3, r6, r3
+	movge	r3, r5
+	mov	r4, r2, lsr r0
+	and	r3, r3, #1
+	and	r3, r3, #255
+	cmp	r3, #0
+	beq	.L66
+	mov	r3, #1
+	str	r3, [fp, #-40]
+	b	.L65
+.L66:
+	mov	r3, #0
+	str	r3, [fp, #-40]
+.L65:
+	ldr	r3, [fp, #-40]
+	mov	r0, r3
+	sub	sp, fp, #16
+	ldmfd	sp!, {r4, r5, r6, fp, lr}
+	bx	lr
+.L69:
+	.align	2
+.L68:
+	.word	.LC8
+	.size	getBitAtIndex, .-getBitAtIndex
+	.align	2
+	.global	getNumBits
+	.type	getNumBits, %function
+getNumBits:
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 32
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {r4, fp, lr}
+	add	fp, sp, #8
+	sub	sp, sp, #36
+	push	{lr}
+	bl	__gnu_mcount_nc
+	sub	ip, fp, #36
+	stmia	ip, {r0, r1, r2, r3}
+	sub	r4, fp, #28
+	ldmia	r4, {r3-r4}
+	mov	r0, r3
+	mov	r1, r4
+	bl	getLongBits
+	mov	r3, r0
+	str	r3, [fp, #-20]
+	sub	r4, fp, #36
+	ldmia	r4, {r3-r4}
+	mov	r0, r3
+	mov	r1, r4
+	bl	getLongBits
+	mov	r3, r0
+	str	r3, [fp, #-16]
+	ldr	r3, [fp, #-16]
+	cmp	r3, #0
+	bne	.L71
+	ldr	r3, [fp, #-20]
+	str	r3, [fp, #-40]
+	b	.L72
+.L71:
+	ldr	r3, [fp, #-16]
+	add	r3, r3, #64
+	str	r3, [fp, #-40]
+.L72:
+	ldr	r3, [fp, #-40]
+	mov	r0, r3
+	sub	sp, fp, #8
+	ldmfd	sp!, {r4, fp, lr}
+	bx	lr
+	.size	getNumBits, .-getNumBits
+	.align	2
+	.global	getLongBits
+	.type	getLongBits, %function
+getLongBits:
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 16
+	@ frame_needed = 1, uses_anonymous_args = 0
+	@ link register save eliminated.
+	stmfd	sp!, {r4, fp}
+	add	fp, sp, #4
+	sub	sp, sp, #16
+	push	{lr}
+	bl	__gnu_mcount_nc
+	str	r0, [fp, #-20]
+	str	r1, [fp, #-16]
+	mov	r3, #0
+	str	r3, [fp, #-8]
+	b	.L75
+.L76:
+	ldr	r3, [fp, #-8]
+	add	r3, r3, #1
+	str	r3, [fp, #-8]
+	sub	r4, fp, #20
+	ldmia	r4, {r3-r4}
+	movs	r4, r4, lsr #1
+	mov	r3, r3, rrx
+	str	r3, [fp, #-20]
+	str	r4, [fp, #-16]
+.L75:
+	ldr	r3, [fp, #-20]
+	ldr	r2, [fp, #-16]
+	orr	r3, r3, r2
+	cmp	r3, #0
+	bne	.L76
+	ldr	r3, [fp, #-8]
+	mov	r0, r3
+	sub	sp, fp, #4
+	ldmfd	sp!, {r4, fp}
+	bx	lr
+	.size	getLongBits, .-getLongBits
+	.ident	"GCC: (Sourcery G++ Lite 2008q3-72) 4.3.2"
+	.section	.note.GNU-stack,"",%progbits
