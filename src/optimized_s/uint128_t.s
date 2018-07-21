@@ -183,7 +183,7 @@ add_uint128:
 	ldr	r2, [fp, #-64]
 	cmp	r4, r2
 	bhi	.L15
-	cmp	r2, r4
+	cmp	r4, r2
 	bne	.L10
 	ldr	r2, [fp, #-60]
 	ldr	r3, [fp, #-68]
