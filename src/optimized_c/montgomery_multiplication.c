@@ -37,8 +37,7 @@ uint128_t montgomery_multiplication(uint128_t x, uint128_t y, uint128_t m) {
     NTimesM = multiply_uint128(n, m);
   }
 
-  T = bitshift_uint128_right((add_uint128(add_uint128(T, XiTimesY), NTimesM)),
-                             1);
+  T = bitshift_uint128_right((add_uint128(add_uint128(T, XiTimesY), NTimesM)));
 
   if (greater_than_or_equal_uint128(T, m)) {
     T = subtract_uint128(T, m);
