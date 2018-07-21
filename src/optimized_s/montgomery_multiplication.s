@@ -53,8 +53,7 @@ montgomery_multiplication:
 	add	r3, fp, #4
 	ldmia	r3, {r0, r1, r2, r3}
 	bl	getNumBits
-	mov	r3, r0
-	mov	r4, r3
+	mov	r4, r0
 	add	r3, fp, #20
 	ldmia	r3, {r0, r1, r2, r3}
 	bl	getNumBits
@@ -64,7 +63,6 @@ montgomery_multiplication:
 	movge	r3, r4
 	movlt	r3, r5
 	str	r3, [fp, #-16]
-	ldr	r3, [fp, #-16]
 	cmp	r3, r2
 	movlt	r3, r2
 	str	r3, [fp, #-16]
