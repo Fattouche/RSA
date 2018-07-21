@@ -80,13 +80,11 @@ montgomery_multiplication:
 	bl	getBitAtIndex
 	mov	r3, r0
 	str	r3, [fp, #-28]
-	ldr	r3, [fp, #-28]
+	ldr r4,  [fp, #-20]
 	ldr	r2, [fp, #-168]
 	and	r3, r3, r2
 	str	r3, [fp, #-24]
-	ldr	r2, [fp, #-20]
-	ldr	r3, [fp, #-24]
-	eor	r3, r2, r3
+	eor	r3, r4, r3
 	str	r3, [fp, #-32]
 	sub	ip, fp, #132
 	mov	r2, sp
