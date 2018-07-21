@@ -44,7 +44,7 @@ build_exp:
 	@mkdir -p ${BUILD_DIR} && arm-linux-gcc -S -static -I${INCLUDE_DIR} ${EXP_SOURCE} -o ${EXP_EXE} -pg 
 
 build_exp_asm:
-	@mkdir -p ${BUILD_DIR} && arm-linux-gcc -S build -static -I${INCLUDE_DIR} ${EXP_SOURCE} -pg && mv *.s ${BUILD_DIR}
+	@mkdir -p ${BUILD_DIR} && arm-linux-gcc -S -static -I${INCLUDE_DIR} ${EXP_SOURCE} -pg && mv *.s ${BUILD_DIR}
 
 # Need to use .* because the file name will be ${PROFILE_OUTPUT}.[pid]
 profile_exp: run_exp
