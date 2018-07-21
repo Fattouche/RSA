@@ -26,8 +26,8 @@ uint128_t montgomery_multiplication(uint128_t x, uint128_t y, uint128_t m) {
   NTimesM = multiply_uint128(n, m);
 
   for (i = 0; i < num_bits - 1; i++) {
-    T = bitshift_uint128_right((add_uint128(add_uint128(T, XiTimesY), NTimesM)),
-                               1);
+    T = bitshift_uint128_right(
+        (add_uint128(add_uint128(T, XiTimesY), NTimesM)));
 
     t0 = getBitAtIndex(T, zero);
     Xi = getBitAtIndex(x, i + 1);
