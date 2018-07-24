@@ -65,23 +65,22 @@ uint128_t multiply_uint128(int bit, uint128_t multiplier) {
   }
 }
 
+#define NUM_BITS_UNSIGNED_LONG_LONG 64
+
 uint128_t bitshift_uint128_right(uint128_t input_num) {
-  size_t num_bits_in_unsigned_long_long = CHAR_BIT * sizeof(unsigned long long);
-
   uint128_t result = {0, 0};
-  size_t num_bits_to_shift = 1;
 
-  result.ls_bytes = input_num.ls_bytes >> num_bits_to_shift;
+  result.ls_bytes = input_num.ls_bytes >> 1;
 
   // Isolate the bits that are going to be lost by right shifting the ms_bytes
   unsigned long long crossover =
-      input_num.ms_bytes & ((input_num.ms_bytes << num_bits_to_shift) - 1);
+      input_num.ms_bytes & ((input_num.ms_bytes << 1) - 1);
 
-  result.ms_bytes = input_num.ms_bytes >> num_bits_to_shift;
+  result.ms_bytes = input_num.ms_bytes >> 1;
 
   // Put the crossover bits onto the leftmost part of ls_bytes
   result.ls_bytes |=
-      (crossover << (num_bits_in_unsigned_long_long - num_bits_to_shift));
+      (crossover << (NUM_BITS_UNSIGNED_LONG_LONG - 1));
 
   return result;
 }
@@ -125,7 +124,7 @@ void print_uint128(uint128_t num) {
   printf("0x%016llx%016llx", num.ms_bytes, num.ls_bytes);
 }
 
-inline int getBitAtIndex(uint128_t num, int index) {
+int getBitAtIndex(uint128_t num, int index) {
   if (index > 127) {
     error("Bit index out of range");
   }

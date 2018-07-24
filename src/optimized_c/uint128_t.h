@@ -45,7 +45,7 @@ int greater_than_or_equal_uint128(uint128_t left, uint128_t right);
 void print_uint128(uint128_t num);
 
 // Returns the bit(1/0) at the given index
-inline int getBitAtIndex(uint128_t num, int index);
+int getBitAtIndex(uint128_t num, int index);
 
 // Returns the number of bits in the number
 int getNumBits(uint128_t num);
