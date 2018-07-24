@@ -41,34 +41,27 @@ montgomery_multiplication:
 	add	r3, fp, #20
 	ldmia	r3, {r0, r1, r2, r3}
 	bl	getBitAtIndex
-	mov	r3, r0
-	str	r3, [fp, #-40]
+	str	r0, [fp, #-40]
 	add	r3, fp, #36
 	ldmia	r3, {r0, r1, r2, r3}
 	bl	getNumBits
-	mov	r3, r0
-	str	r3, [fp, #-36]
-	add	r3, fp, #4
-	ldmia	r3, {r0, r1, r2, r3}
+	str	r0, [fp, #-36]
+	add	r0, fp, #4
+	ldmia	r0, {r0, r1, r2, r3}
 	bl	getNumBits
-	mov	r3, r0
-	str	r3, [fp, #-32]
-	add	r3, fp, #20
-	ldmia	r3, {r0, r1, r2, r3}
+	str	r0, [fp, #-32]
+	add	r0, fp, #20
+	ldmia	r0, {r0, r1, r2, r3}
 	bl	getNumBits
-	mov	r3, r0
-	str	r3, [fp, #-28]
+	str	r0, [fp, #-28]
 	ldr	r2, [fp, #-32]
 	ldr	r3, [fp, #-36]
 	cmp	r2, r3
 	movge	r3, r2
-	movlt	r3, r3
-	str	r3, [fp, #-24]
-	ldr	r2, [fp, #-24]
+	mov r2, r3
 	ldr	r3, [fp, #-28]
 	cmp	r2, r3
 	movge	r3, r2
-	movlt	r3, r3
 	str	r3, [fp, #-24]
 	add	r4, fp, #12
 	ldmia	r4, {r3-r4}
@@ -82,43 +75,33 @@ montgomery_multiplication:
 	ldmia	r4, {r3-r4}
 	and	r3, r3, #1
 	str	r3, [fp, #-44]
-	ldr	r3, [fp, #-40]
+	ldr	r1, [fp, #-40]
 	ldr	r2, [fp, #-184]
-	and	r3, r2, r3
-	str	r3, [fp, #-48]
-	ldr	r2, [fp, #-44]
-	ldr	r3, [fp, #-48]
-	eor	r3, r2, r3
+	and	r1, r2, r1
+	str	r1, [fp, #-48]
+	eor	r3, r3, r1
 	str	r3, [fp, #-52]
 	add	r2, fp, #28
 	ldmia	r2, {r1-r2}
 	ldr	r5, [fp, #-184]
-	mov	r3, r5
-	mov	r4, r3, asr #31
-	mul	r0, r3, r2
+	mov	r4, r5, asr #31
+	mul	r0, r5, r2
 	mul	ip, r1, r4
 	add	r0, r0, ip
-	umull	r5, r6, r1, r3
-	mov	r3, r5
-	mov	r4, r6
-	add	r0, r0, r4
-	mov	r4, r0
-	str	r3, [fp, #-140]
+	umull	r5, r6, r1, r5
+	add	r4, r0, r6
+	str	r5, [fp, #-140]
 	str	r4, [fp, #-136]
 	add	r2, fp, #20
 	ldmia	r2, {r1-r2}
 	ldr	r6, [fp, #-184]
-	mov	r3, r6
-	mov	r4, r3, asr #31
-	mul	r0, r3, r2
+	mov	r4, r6, asr #31
+	mul	r0, r6, r2
 	mul	ip, r1, r4
 	add	r0, r0, ip
-	umull	r5, r6, r1, r3
-	mov	r3, r5
-	mov	r4, r6
-	add	r0, r0, r4
-	mov	r4, r0
-	str	r3, [fp, #-148]
+	umull	r5, r6, r1, r6
+	add	r4, r0, r6
+	str	r5, [fp, #-148]
 	str	r4, [fp, #-144]
 	add	r2, fp, #44
 	ldmia	r2, {r1-r2}
@@ -128,11 +111,8 @@ montgomery_multiplication:
 	mul	ip, r1, r4
 	add	r0, r0, ip
 	umull	r5, r6, r1, r3
-	mov	r3, r5
-	mov	r4, r6
-	add	r0, r0, r4
-	mov	r4, r0
-	str	r3, [fp, #-156]
+	add	r4, r0, r6
+	str	r5, [fp, #-156]
 	str	r4, [fp, #-152]
 	add	r2, fp, #36
 	ldmia	r2, {r1-r2}
@@ -142,11 +122,8 @@ montgomery_multiplication:
 	mul	ip, r1, r4
 	add	r0, r0, ip
 	umull	r5, r6, r1, r3
-	mov	r3, r5
-	mov	r4, r6
-	add	r0, r0, r4
-	mov	r4, r0
-	str	r3, [fp, #-164]
+	add	r4, r0, r6
+	str	r5, [fp, #-164]
 	str	r4, [fp, #-160]
 	sub	lr, fp, #116
 	add	ip, sp, #8
@@ -223,8 +200,7 @@ montgomery_multiplication:
 	cmp	r6, r3
 	bge	.L5
 	ldr	r0, [fp, #-188]
-	add	r3, r0, #1
-	cmp	r3, #63
+	cmp	r0, #62
 	ble	.L4
 	b	.L5
 .L6:
