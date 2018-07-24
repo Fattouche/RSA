@@ -18,36 +18,42 @@ uint128_t montgomery_multiplication(uint128_t X, uint128_t Y, uint128_t M) {
   int num_bits = M_num_bits > X_num_bits ? M_num_bits : X_num_bits;
   num_bits = Y_num_bits > num_bits ? Y_num_bits : num_bits;
 
-  for (i = 0; i < num_bits; i++) {
-    if ((0x1 & T.ls_bytes) > 0) {
-      T0 = 1;
-    } else {
-      T0 = 0;
-    }
-
-    if (i >= 64) {
-      if ((((unsigned long long)1 << (i - 64)) & X.ms_bytes) > 0) {
-        Xi = 1;
-      } else {
-        Xi = 0;
-      }
-    } else {
-      if ((((unsigned long long)1 << i) & X.ls_bytes) > 0) {
-        Xi = 1;
-      } else {
-        Xi = 0;
-      }
-    }
-
+  Xi = X.ls_bytes & 0x1;
+  
+  for (i = 0; i < num_bits && i+1 < 64; i++) {
+    T0 = T.ls_bytes & 0x1;   
     Xi_and_Y0 = Xi & Y0;
     n = (T0 ^ Xi_and_Y0);
-    Xi_times_Y = multiply_uint128(Xi, Y);
-    n_times_M = multiply_uint128(n, M);
+    Xi_times_Y.ls_bytes = Y.ls_bytes * Xi;
+    Xi_times_Y.ms_bytes = Y.ms_bytes * Xi;
+    n_times_M.ls_bytes = M.ls_bytes * n;
+    n_times_M.ms_bytes = M.ms_bytes * n;
 
     //  T = (T + Xi * Y + n * M) >> 1;
     T = bitshift_uint128_right(
         (add_uint128(add_uint128(T, Xi_times_Y), n_times_M)));
+
+    Xi = (((unsigned long long)1 << i+1) & X.ls_bytes) >> i+1;
   }
+
+  for (; i < num_bits; i++) {
+    T0 = T.ls_bytes & 0x1;   
+    Xi_and_Y0 = Xi & Y0;
+    n = (T0 ^ Xi_and_Y0);
+    Xi_times_Y.ls_bytes = Y.ls_bytes * Xi;
+    Xi_times_Y.ms_bytes = Y.ms_bytes * Xi;
+    n_times_M.ls_bytes = M.ls_bytes * n;
+    n_times_M.ms_bytes = M.ms_bytes * n;
+
+    //  T = (T + Xi * Y + n * M) >> 1;
+    T = bitshift_uint128_right(
+        (add_uint128(add_uint128(T, Xi_times_Y), n_times_M)));
+
+    Xi = (((unsigned long long)1 << (i+1 - 64)) & X.ms_bytes) >> (i+1 - 64);
+  }
+
+
+
   if (greater_than_or_equal_uint128(T, M)) {
     T = subtract_uint128(T, M);
   }
