@@ -29,9 +29,34 @@ uint128_t montgomery_multiplication(uint128_t X, uint128_t Y, uint128_t M) {
     n_times_M.ls_bytes = M.ls_bytes * n;
     n_times_M.ms_bytes = M.ms_bytes * n;
 
-    //  T = (T + Xi * Y + n * M) >> 1;
-    T = bitshift_uint128_right(
-        (add_uint128(add_uint128(T, Xi_times_Y), n_times_M)));
+    asm("/* start of first add */");
+    uint128_t result = {0, 0};
+    result.ls_bytes = T.ls_bytes + Xi_times_Y.ls_bytes;
+    // Check if overflow occured
+    if (result.ls_bytes < T.ls_bytes) {
+      result.ms_bytes = 1;
+    }
+    result.ms_bytes += (T.ms_bytes + Xi_times_Y.ms_bytes);
+
+    asm("/* start of second add */");
+    uint128_t result_2 = {0, 0};
+    result_2.ls_bytes = result.ls_bytes + n_times_M.ls_bytes;
+    // Check if overflow occured
+    if (result_2.ls_bytes < result.ls_bytes) {
+      result_2.ms_bytes = 1;
+    }
+    result_2.ms_bytes += (result.ms_bytes + n_times_M.ms_bytes);
+
+    asm("/* start of bitshift */");
+    T.ls_bytes = result_2.ls_bytes >> 1;
+    // Isolate the bits that are going to be lost by right shifting the ms_bytes
+    unsigned long long crossover =
+        result_2.ms_bytes & ((result_2.ms_bytes << 1) - 1);
+    T.ms_bytes = result_2.ms_bytes >> 1;
+    // Put the crossover bits onto the leftmost part of ls_bytes
+    T.ls_bytes |= (crossover << (64 - 1));
+
+    asm("/* end of inlining */");
 
     Xi = (((unsigned long long)1 << i+1) & X.ls_bytes) >> i+1;
   }
@@ -45,9 +70,33 @@ uint128_t montgomery_multiplication(uint128_t X, uint128_t Y, uint128_t M) {
     n_times_M.ls_bytes = M.ls_bytes * n;
     n_times_M.ms_bytes = M.ms_bytes * n;
 
-    //  T = (T + Xi * Y + n * M) >> 1;
-    T = bitshift_uint128_right(
-        (add_uint128(add_uint128(T, Xi_times_Y), n_times_M)));
+    asm("/* start of second inlining */");
+    uint128_t result = {0, 0};
+    result.ls_bytes = T.ls_bytes + Xi_times_Y.ls_bytes;
+    // Check if overflow occured
+    if (result.ls_bytes < T.ls_bytes) {
+      result.ms_bytes = 1;
+    }
+    result.ms_bytes += (T.ms_bytes + Xi_times_Y.ms_bytes);
+
+    
+    uint128_t result_2 = {0, 0};
+    result_2.ls_bytes = result.ls_bytes + n_times_M.ls_bytes;
+    // Check if overflow occured
+    if (result_2.ls_bytes < result.ls_bytes) {
+      result_2.ms_bytes = 1;
+    }
+    result_2.ms_bytes += (result.ms_bytes + n_times_M.ms_bytes);
+
+    T.ls_bytes = result_2.ls_bytes >> 1;
+    // Isolate the bits that are going to be lost by right shifting the ms_bytes
+    unsigned long long crossover =
+        result_2.ms_bytes & ((result_2.ms_bytes << 1) - 1);
+    T.ms_bytes = result_2.ms_bytes >> 1;
+    // Put the crossover bits onto the leftmost part of ls_bytes
+    T.ls_bytes |= (crossover << (64 - 1));
+    
+    asm("/* end of second inlining */");
 
     Xi = (((unsigned long long)1 << (i+1 - 64)) & X.ms_bytes) >> (i+1 - 64);
   }

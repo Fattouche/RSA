@@ -35,17 +35,6 @@ uint128_t add_uint128(uint128_t left, uint128_t right) {
 
   result.ms_bytes += (left.ms_bytes + right.ms_bytes);
 
-  if (result.ms_bytes < left.ms_bytes) {
-    printf("Overflow on addition: \n");
-    printf("Left: ");
-    print_uint128(left);
-    printf("Right: ");
-    print_uint128(right);
-    printf("Result: ");
-    print_uint128(result);
-    error("");
-  }
-
   return result;
 }
 
