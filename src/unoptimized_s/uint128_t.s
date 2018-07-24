@@ -123,9 +123,9 @@ or_uint128:
 	.size	or_uint128, .-or_uint128
 	.section	.rodata
 	.align	3
-	.type	C.0.2166, %object
-	.size	C.0.2166, 16
-C.0.2166:
+	.type	C.0.1658, %object
+	.size	C.0.1658, 16
+C.0.1658:
 	.space	16
 	.align	2
 .LC1:
@@ -268,7 +268,7 @@ add_uint128:
 .L18:
 	.align	2
 .L17:
-	.word	C.0.2166
+	.word	C.0.1658
 	.word	.LC1
 	.word	.LC2
 	.word	.LC3
@@ -336,9 +336,9 @@ equals_uint128:
 	.size	equals_uint128, .-equals_uint128
 	.section	.rodata
 	.align	3
-	.type	C.1.2205, %object
-	.size	C.1.2205, 16
-C.1.2205:
+	.type	C.1.1697, %object
+	.size	C.1.1697, 16
+C.1.1697:
 	.space	16
 	.text
 	.align	2
@@ -385,13 +385,13 @@ multiply_uint128:
 .L28:
 	.align	2
 .L27:
-	.word	C.1.2205
+	.word	C.1.1697
 	.size	multiply_uint128, .-multiply_uint128
 	.section	.rodata
 	.align	3
-	.type	C.2.2218, %object
-	.size	C.2.2218, 16
-C.2.2218:
+	.type	C.2.1708, %object
+	.size	C.2.1708, 16
+C.2.1708:
 	.space	16
 	.text
 	.align	2
@@ -399,115 +399,75 @@ C.2.2218:
 	.type	bitshift_uint128_right, %function
 bitshift_uint128_right:
 	@ Function supports interworking.
-	@ args = 16, pretend = 8, frame = 32
+	@ args = 16, pretend = 8, frame = 24
 	@ frame_needed = 1, uses_anonymous_args = 0
 	@ link register save eliminated.
 	sub	sp, sp, #8
-	stmfd	sp!, {r4, r5, r6, r7, r8, sl, fp}
-	add	fp, sp, #24
-	sub	sp, sp, #36
+	stmfd	sp!, {r4, r5, r6, r7, fp}
+	add	fp, sp, #16
+	sub	sp, sp, #28
 	push	{lr}
 	bl	__gnu_mcount_nc
-	mov	sl, r0
+	mov	r7, r0
 	add	r1, fp, #4
 	stmia	r1, {r2, r3}
-	mov	r3, #64
-	str	r3, [fp, #-44]
 	ldr	r3, .L31
-	sub	ip, fp, #60
+	sub	ip, fp, #44
 	ldmia	r3, {r0, r1, r2, r3}
 	stmia	ip, {r0, r1, r2, r3}
-	mov	r3, #1
-	str	r3, [fp, #-40]
-	add	r2, fp, #12
-	ldmia	r2, {r1-r2}
-	ldr	r0, [fp, #-40]
-	sub	ip, r0, #32
-	mov	r6, r2, lsr ip
-	rsb	r3, r0, #32
-	mov	r5, r2, asl r3
-	cmp	ip, #0
-	mov	r3, r1, lsr r0
-	orr	r3, r5, r3
-	movge	r3, r6
-	mov	r4, r2, lsr r0
-	str	r3, [fp, #-52]
-	str	r4, [fp, #-48]
-	ldmib	fp, {r6-r7}
-	ldmib	fp, {r1-r2}
-	ldr	r0, [fp, #-40]
-	sub	ip, r0, #32
-	mov	r8, r1, asl ip
-	rsb	r3, r0, #32
-	mov	r5, r1, lsr r3
-	cmp	ip, #0
-	mov	r4, r2, asl r0
-	orr	r4, r5, r4
-	movge	r4, r8
-	mov	r3, r1, asl r0
-	mvn	r1, #0
-	mvn	r2, #0
-	adds	r3, r3, r1
-	adc	r4, r4, r2
-	and	r3, r3, r6
-	and	r4, r4, r7
+	add	r4, fp, #12
+	ldmia	r4, {r3-r4}
+	movs	r4, r4, lsr #1
+	mov	r3, r3, rrx
 	str	r3, [fp, #-36]
 	str	r4, [fp, #-32]
-	ldmib	fp, {r1-r2}
-	ldr	r0, [fp, #-40]
-	sub	ip, r0, #32
-	mov	r6, r2, lsr ip
-	rsb	r3, r0, #32
-	mov	r5, r2, asl r3
-	cmp	ip, #0
-	mov	r3, r1, lsr r0
-	orr	r3, r5, r3
-	movge	r3, r6
-	mov	r4, r2, lsr r0
-	str	r3, [fp, #-60]
-	str	r4, [fp, #-56]
-	sub	r6, fp, #52
-	ldmia	r6, {r5-r6}
-	ldr	r2, [fp, #-44]
-	ldr	r3, [fp, #-40]
-	rsb	r3, r3, r2
+	ldmib	fp, {r5-r6}
+	ldmib	fp, {r3-r4}
+	adds	r3, r3, r3
+	adc	r4, r4, r4
 	mov	r1, r3
-	sub	r0, r1, #32
-	ldr	r3, [fp, #-36]
-	mov	ip, r3, asl r0
-	rsb	r2, r1, #32
-	ldr	r3, [fp, #-36]
-	mov	r7, r3, lsr r2
-	ldr	r2, [fp, #-32]
-	cmp	r0, #0
-	ldr	r0, [fp, #-36]
-	mov	r4, r2, asl r1
-	orr	r4, r7, r4
-	movge	r4, ip
-	mov	r3, r0, asl r1
-	orr	r3, r3, r5
-	orr	r4, r4, r6
-	str	r3, [fp, #-52]
-	str	r4, [fp, #-48]
-	mov	ip, sl
-	sub	r3, fp, #60
+	mov	r2, r4
+	mvn	r3, #0
+	mvn	r4, #0
+	adds	r3, r3, r1
+	adc	r4, r4, r2
+	and	r3, r3, r5
+	and	r4, r4, r6
+	str	r3, [fp, #-28]
+	str	r4, [fp, #-24]
+	ldmib	fp, {r3-r4}
+	movs	r4, r4, lsr #1
+	mov	r3, r3, rrx
+	str	r3, [fp, #-44]
+	str	r4, [fp, #-40]
+	sub	r1, fp, #36
+	ldmia	r1, {r0-r1}
+	ldr	r2, [fp, #-28]
+	mov	r4, r2, asl #31
+	mov	r3, #0
+	orr	r3, r3, r0
+	orr	r4, r4, r1
+	str	r3, [fp, #-36]
+	str	r4, [fp, #-32]
+	mov	ip, r7
+	sub	r3, fp, #44
 	ldmia	r3, {r0, r1, r2, r3}
 	stmia	ip, {r0, r1, r2, r3}
-	mov	r0, sl
-	sub	sp, fp, #24
-	ldmfd	sp!, {r4, r5, r6, r7, r8, sl, fp}
+	mov	r0, r7
+	sub	sp, fp, #16
+	ldmfd	sp!, {r4, r5, r6, r7, fp}
 	add	sp, sp, #8
 	bx	lr
 .L32:
 	.align	2
 .L31:
-	.word	C.2.2218
+	.word	C.2.1708
 	.size	bitshift_uint128_right, .-bitshift_uint128_right
 	.section	.rodata
 	.align	3
-	.type	C.6.2249, %object
-	.size	C.6.2249, 16
-C.6.2249:
+	.type	C.3.1734, %object
+	.size	C.3.1734, 16
+C.3.1734:
 	.space	16
 	.align	2
 .LC6:
@@ -664,7 +624,7 @@ subtract_uint128:
 	.align	2
 .L44:
 	.word	.LC6
-	.word	C.6.2249
+	.word	C.3.1734
 	.size	subtract_uint128, .-subtract_uint128
 	.align	2
 	.global	greater_than_or_equal_uint128

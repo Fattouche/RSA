@@ -11,9 +11,9 @@
 	.file	"montgomery_exponentiation.c"
 	.section	.rodata
 	.align	3
-	.type	C.3.2159, %object
-	.size	C.3.2159, 16
-C.3.2159:
+	.type	C.3.1651, %object
+	.size	C.3.1651, 16
+C.3.1651:
 	.word	0
 	.word	0
 	.word	1
@@ -196,7 +196,7 @@ montgomery_exponentiation:
 .L7:
 	.align	2
 .L6:
-	.word	C.3.2159
+	.word	C.3.1651
 	.size	montgomery_exponentiation, .-montgomery_exponentiation
 	.ident	"GCC: (Sourcery G++ Lite 2008q3-72) 4.3.2"
 	.section	.note.GNU-stack,"",%progbits

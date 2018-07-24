@@ -11,49 +11,49 @@
 	.file	"test_montgomery_exponentiation.c"
 	.section	.rodata
 	.align	3
-	.type	C.5.2166, %object
-	.size	C.5.2166, 16
-C.5.2166:
+	.type	C.5.1658, %object
+	.size	C.5.1658, 16
+C.5.1658:
 	.word	-1053270442
 	.word	20508753
 	.word	840128501
 	.word	674335051
 	.align	3
-	.type	C.4.2165, %object
-	.size	C.4.2165, 16
-C.4.2165:
+	.type	C.4.1657, %object
+	.size	C.4.1657, 16
+C.4.1657:
 	.word	-919291425
 	.word	243098771
 	.word	-1266553458
 	.word	221639301
 	.align	3
-	.type	C.3.2164, %object
-	.size	C.3.2164, 16
-C.3.2164:
+	.type	C.3.1656, %object
+	.size	C.3.1656, 16
+C.3.1656:
 	.word	-1100196760
 	.word	263259224
 	.word	1422985197
 	.word	-524942358
 	.align	3
-	.type	C.2.2163, %object
-	.size	C.2.2163, 16
-C.2.2163:
+	.type	C.2.1655, %object
+	.size	C.2.1655, 16
+C.2.1655:
 	.word	-1495449084
 	.word	258367482
 	.word	1223401393
 	.word	-1298371888
 	.align	3
-	.type	C.1.2162, %object
-	.size	C.1.2162, 16
-C.1.2162:
+	.type	C.1.1654, %object
+	.size	C.1.1654, 16
+C.1.1654:
 	.word	1613708038
 	.word	208400071
 	.word	740267489
 	.word	1538436146
 	.align	2
-	.type	C.0.2161, %object
-	.size	C.0.2161, 8
-C.0.2161:
+	.type	C.0.1653, %object
+	.size	C.0.1653, 8
+C.0.1653:
 	.space	8
 	.align	2
 .LC0:
@@ -159,12 +159,12 @@ main:
 .L4:
 	.align	2
 .L3:
-	.word	C.0.2161
-	.word	C.1.2162
-	.word	C.2.2163
-	.word	C.3.2164
-	.word	C.4.2165
-	.word	C.5.2166
+	.word	C.0.1653
+	.word	C.1.1654
+	.word	C.2.1655
+	.word	C.3.1656
+	.word	C.4.1657
+	.word	C.5.1658
 	.word	.LC0
 	.word	.LC1
 	.word	.LC2
